@@ -73,7 +73,8 @@ public class PlayerController : MonoBehaviour
 		for (int i = 0; i < awkwardnessSliders.Count; i++)
 		{
 			awkwardnessSliders[i].value = 0f;
-			awkwardnessSliderText[i].enabled = false;
+			awkwardnessSliderText[i].color = Color.black;
+			awkwardnessSliderText[i].text = Players[i].keyCode.ToString();
 			awkwardnessSliderBacks[i].color = i < count ? Color.white : Color.gray;
 		}
 	}
@@ -104,7 +105,8 @@ public class PlayerController : MonoBehaviour
 				if (player.awkwardness >= maxAwkwardness)
 				{
 					player.isDead = true;
-					awkwardnessSliderText[i].enabled = true;
+					awkwardnessSliderText[i].text = "DEAD";
+					awkwardnessSliderText[i].color = Color.white;
 				}
 			}
 		}
