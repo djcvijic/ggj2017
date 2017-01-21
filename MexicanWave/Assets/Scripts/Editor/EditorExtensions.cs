@@ -21,6 +21,15 @@ public class EditorExtensions
 		WaveController.I.AddSimpleWave();
 	}
 
+	[MenuItem("GGJ2017/Add double wave")]
+	private static void AddDoubleWave()
+	{
+		if (!Application.isPlaying)
+			return;
+		WaveController.I.AddWave(3f, 12f, 1, true);
+		WaveController.I.AddWave(3f, 12f, 1, false);
+	}
+
 	[MenuItem("GGJ2017/Clear all waves")]
 	private static void ClearAllWaves()
 	{

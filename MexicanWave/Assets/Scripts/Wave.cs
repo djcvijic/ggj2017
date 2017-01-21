@@ -7,14 +7,14 @@ public class Wave
 	public float centerPosition;
 	public float range;
 	public float speed;
-	public float remainingBounces;
+	public int remainingBounces;
 
 	public float LeftBorder { get { return centerPosition - range; } }
 	public float RightBorder { get { return centerPosition + range; } }
 
 	private bool goingRight;
 
-	public Wave(float range, float speed, float remainingBounces, bool initialRight = true)
+	public Wave(float range, float speed, int remainingBounces, bool initialRight = true)
 	{
 		this.centerPosition = initialRight ? WaveController.I.positionMin - range : WaveController.I.positionMax + range;
 		this.range = range;
