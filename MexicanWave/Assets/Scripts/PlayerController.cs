@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
 	public List<HumanPlayer> ActivePlayers { get; private set; }
 
 	public float maxAwkwardness = 1f;
-	public float awkwardnessIncrease;
 
 	void Awake()
 	{
@@ -84,9 +83,9 @@ public class PlayerController : MonoBehaviour
 
 			// check if player is in right position
 			var val = StandsController.I.Seats[player.x, player.y];
-			if ((val <= 0.1f && player.isStanding) || (val >= 0.9f && !player.isStanding))
+			if ((val <= 0.3f && player.isStanding) || (val >= 0.7f && !player.isStanding))
 			{
-				player.awkwardness += awkwardnessIncrease;
+				player.awkwardness += Time.deltaTime;
 				Debug.Log(player.awkwardness + "  " + (player.isStanding ? "STANDING!" : "SITTING!"));
 				if (player.awkwardness >= maxAwkwardness)
 				{
