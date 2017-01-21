@@ -101,20 +101,30 @@ public class PlayerController : MonoBehaviour
 				if (kcode == KeyCode.Escape || kcode == KeyCode.Space 
 					|| (kcode >= KeyCode.JoystickButton0 && kcode <= KeyCode.JoystickButton19))
 					continue;
-				if (Input.GetKeyDown(kcode) && !Players.Exists(p => p.keyCode == kcode))
+				if (Input.GetKeyDown(kcode) && !Players.Exists(p => p.isActive && p.keyCode == kcode))
 				{
-					Debug.Log("KeyCode down: " + kcode);
-					var activatedPlayer = Players.Find(p => !p.isActive);
-					activatedPlayer.keyCode = kcode;
-					activatedPlayer.isActive = true;
-					activatedPlayer.isStanding = true;
-					activatedPlayer.justActivated = true;
+					HumanPlayer activatedPlayer;
+					// try to find previous position of this key
+					activatedPlayer = Players.Find(p => p.keyCode == kcode);
+					if (activatedPlayer == null)
+					{
+						// if can't find it, find any innactive one
+						activatedPlayer = Players.Find(p => !p.isActive);
+					}
+					// if found it
+					if (activatedPlayer != null)
+					{
+						activatedPlayer.keyCode = kcode;
+						activatedPlayer.isActive = true;
+						activatedPlayer.isStanding = true;
+						activatedPlayer.justActivated = true;
 
-					var seat = StandsView.I.At(activatedPlayer.x, activatedPlayer.y);
-					seat.playedId = Players.FindIndex(p => p == activatedPlayer);
-					seat.InvertColor();
-					seat.DeactivateAccessories();
-					awkwardnessSliderBacks[seat.playedId].color = Color.white;
+						var seat = StandsView.I.At(activatedPlayer.x, activatedPlayer.y);
+						seat.playedId = Players.FindIndex(p => p == activatedPlayer);
+						seat.InvertColor();
+						seat.DeactivateAccessories();
+						awkwardnessSliderBacks [seat.playedId].color = Color.white;
+					}
 				}
 			}
 		}
@@ -140,13 +150,11 @@ public class PlayerController : MonoBehaviour
 				}
 				else
 				{
-					Debug.Log("DEACTIVATE" + player.keyCode);
 					player.isActive = false;
 					player.isStanding = false;
 					var seat = StandsView.I.At(player.x, player.y);
 
 					seat.playedId = -1;
-					player.keyCode = KeyCode.None;
 					seat.ResetColor();
 					awkwardnessSliderBacks [i].color = Color.gray;
 				}
