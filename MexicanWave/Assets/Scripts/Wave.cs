@@ -13,6 +13,7 @@ public class Wave
 	public float RightBorder { get { return centerPosition + range; } }
 
 	private bool goingRight;
+	private float timeToStart;
 	public AnimationCurve speedCurve;
 
 	public float Speed
@@ -29,7 +30,7 @@ public class Wave
 		}
 	}
 
-	public Wave(float range, float speed, int remainingBounces, bool initialRight = true)
+	public Wave(float range, float speed, int remainingBounces, bool initialRight = true, float timeToStart = 0f)
 	{
 		this.centerPosition = initialRight ? WaveController.I.positionMin - range : WaveController.I.positionMax + range;
 		this.range = range;
@@ -37,19 +38,27 @@ public class Wave
 		this.remainingBounces = remainingBounces;
 		this.goingRight = initialRight;
 		this.speedCurve = null;
+		this.timeToStart = timeToStart;
 	}
 
-	public Wave(AnimationCurve speed, float range, int remainingBounces = 0, bool initialRight = true)
+	public Wave(AnimationCurve speed, float range, int remainingBounces = 0, bool initialRight = true, float timeToStart = 0f)
 	{
 		this.centerPosition = initialRight ? WaveController.I.positionMin - range : WaveController.I.positionMax + range;
 		this.speedCurve = speed;
 		this.range = range;
 		this.remainingBounces = remainingBounces;
 		this.goingRight = initialRight;
+		this.timeToStart = timeToStart;
 	}
 
 	public void UpdateWave()
 	{
+		if (timeToStart - Time.deltaTime > 0f)
+		{
+			timeToStart -= Time.deltaTime;
+			return;
+		}
+
 		if (goingRight)
 		{
 			centerPosition += Speed * Time.deltaTime;

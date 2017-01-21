@@ -26,6 +26,7 @@ public class WaveController : MonoBehaviour
 	public float defaultRange;
 	public int defaultBounces;
 	public bool defaultGoingRight = true;
+	public float defaultTimeToStart;
 
 	public float positionMin;
 	public float positionMax;
@@ -41,18 +42,18 @@ public class WaveController : MonoBehaviour
 
 	public void AddSimpleWave()
 	{
-		AddWave(defaultRange, defaultSpeed, defaultBounces, defaultGoingRight);
+		AddWave(defaultRange, defaultSpeed, defaultBounces, defaultGoingRight, defaultTimeToStart);
 	}
 
-	public void AddWave(float range, float speed, int bounces = 0, bool goingRight = true)
+	public void AddWave(float range, float speed, int bounces = 0, bool goingRight = true, float timeToStart = 0f)
 	{
-		var wave = new Wave(range, speed, bounces, goingRight);
+		var wave = new Wave(range, speed, bounces, goingRight, timeToStart);
 		allWaves.Add(wave);
 	}
 
 	public void AddGaussWave()
 	{
-		var wave = new Wave(gaussCurve, defaultRange, defaultBounces, defaultGoingRight);
+		var wave = new Wave(gaussCurve, defaultRange, defaultBounces, defaultGoingRight, defaultTimeToStart);
 		allWaves.Add(wave);
 	}
 
