@@ -20,12 +20,12 @@ public class SingleSeat : MonoBehaviour
 	{
 		this.x = x;
 		this.y = y;
+		myRenderer.color = new Color(Random.value, Random.value, Random.value);
 	}
 
 	void Update()
 	{
 		var val = StandsController.I.Value(x, y);
-		//myRenderer.material.color = new Color(val, 0.5f, 0.5f, 0.5f);
 
 		int index = Mathf.FloorToInt(humanSprites.Length * val);
 		if (index >= humanSprites.Length) index = humanSprites.Length - 1;
