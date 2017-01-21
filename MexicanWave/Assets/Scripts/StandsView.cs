@@ -34,11 +34,11 @@ public class StandsView : MonoBehaviour
 			seats.gameObject.SetActive(false);
 		
 		// create new ones
-		for (int i = 0; i < StandsController.I.width; i++)
+		for (int y = 0; y < StandsController.I.height; y++)
 		{
-			for (int j = 0; j < StandsController.I.height; j++)
+			for (int x = 0; x < StandsController.I.width; x++)
 			{
-				var index = i * StandsController.I.width + j;
+				var index = y * StandsController.I.width + x;
 				SingleSeat singleSeat;
 				if (index < allSeats.Count)
 				{
@@ -51,10 +51,15 @@ public class StandsView : MonoBehaviour
 					allSeats.Add(singleSeat);
 				}
 
-				singleSeat.Init(i, j);
+				singleSeat.Init(x, y);
 				singleSeat.transform.parent = parentContainer;
-				singleSeat.transform.localPosition = new Vector2(i, j);
+				singleSeat.transform.localPosition = new Vector2(x, y);
 			}
 		}
+	}
+
+	public SingleSeat At(int x, int y)
+	{
+		return allSeats[y * StandsController.I.width + x];
 	}
 }

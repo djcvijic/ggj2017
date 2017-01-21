@@ -100,6 +100,7 @@ GameObject:
   - 4: {fileID: 151561796}
   - 114: {fileID: 151561795}
   - 114: {fileID: 151561797}
+  - 114: {fileID: 151561798}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -148,6 +149,7 @@ MonoBehaviour:
   defaultRange: 3
   defaultBounces: 0
   defaultGoingRight: 1
+  defaultTimeToStart: 0
   positionMin: -7.8
   positionMax: 7.8
   defaultOffset: 0.4
@@ -172,6 +174,17 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &151561798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 151561794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7e02279d8cc4d7b946480c35771ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &353768661
 GameObject:
   m_ObjectHideFlags: 0

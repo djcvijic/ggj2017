@@ -51,6 +51,7 @@ public class StandsController : MonoBehaviour
 				Seats[i, j] = columnValue + RandomOffset[i, j];
 			}
 		}
+		PlayerController.I.CheckPlayers();
 	}
 
 	public void StartNewGame(int w, int h)
@@ -67,6 +68,7 @@ public class StandsController : MonoBehaviour
 		}
 		StandsView.I.Reinitialize();
 		WaveController.I.ClearWaves();
+		PlayerController.I.ActivatePlayers(2);
 	}
 
 	public void StartNewGame()

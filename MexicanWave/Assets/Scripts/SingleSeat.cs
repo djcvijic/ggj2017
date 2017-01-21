@@ -7,6 +7,8 @@ public class SingleSeat : MonoBehaviour
 	public int y { get; private set; }
 	public Sprite[] humanSprites;
 
+	public int playedId;
+
 	private SpriteRenderer myRenderer;
 
 	void Awake()
@@ -21,11 +23,12 @@ public class SingleSeat : MonoBehaviour
 		this.x = x;
 		this.y = y;
 		myRenderer.color = new Color(Random.value, Random.value, Random.value);
+		playedId = -1;
 	}
 
 	void Update()
 	{
-		var val = StandsController.I.Value(x, y);
+		var val = playedId != -1 ? PlayerController.I.StandingValue(playedId) : StandsController.I.Value(x, y);
 
 		int index = Mathf.FloorToInt(humanSprites.Length * val);
 		if (index >= humanSprites.Length) index = humanSprites.Length - 1;
