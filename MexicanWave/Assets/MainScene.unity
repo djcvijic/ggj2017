@@ -408,7 +408,8 @@ MonoBehaviour:
   - {fileID: 1997107382}
   - {fileID: 1275402039}
   maxAwkwardness: 1
-  forbidenKeys: 200000001b000000
+  hitParticlePrefab: {fileID: 1000011032762110, guid: 6ffbc638373ef401c8c64614c4eefa54,
+    type: 2}
 --- !u!114 &151561799
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
 	public float maxAwkwardness = 1f;
 
+	public GameObject hitParticlePrefab;
+
 	void Awake()
 	{
 		Players = new List<HumanPlayer>();
@@ -161,6 +163,7 @@ public class PlayerController : MonoBehaviour
 					{
 						player.isDead = true;
 						awkwardnessSliderText[i].color = Color.white;
+						Instantiate(hitParticlePrefab, StandsView.I.At(player.x, player.y).transform.position, Quaternion.identity);
 					}
 				}
 			}
