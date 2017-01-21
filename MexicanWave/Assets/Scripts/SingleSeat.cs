@@ -17,6 +17,7 @@ public class SingleSeat : MonoBehaviour
 	private float animationVal;
 	public float animationSpeed;
 
+	public SpriteRenderer seat;
 	public GameObject[] accessories;
 	private Transform myAccessory;
 	private Vector3 initialAccessoryPosition;
@@ -55,6 +56,14 @@ public class SingleSeat : MonoBehaviour
 			myAccessory = randomAccessory.transform;
 			initialAccessoryPosition = myAccessory.localPosition;
 			randomAccessory.GetComponent<SpriteRenderer>().color = accessoryColor;
+		}
+
+		// fix sprite ordering
+		seat.sortingOrder = -y * 3;
+		myRenderer.sortingOrder = -y * 3 + 1;
+		for (int i = 0; i < accessories.Length; i++)
+		{
+			accessories[i].GetComponent<SpriteRenderer>().sortingOrder = -y * 3 + 2;
 		}
 	}
 

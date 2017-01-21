@@ -236,6 +236,7 @@ MonoBehaviour:
   humanSprites: []
   playedId: 0
   animationSpeed: 12
+  seat: {fileID: 212000013856702512}
   accessories:
   - {fileID: 1000011619151152}
   - {fileID: 1000010011060302}
