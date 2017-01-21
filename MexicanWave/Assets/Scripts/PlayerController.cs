@@ -29,10 +29,13 @@ public class PlayerController : MonoBehaviour
 
 	public float maxAwkwardness = 1f;
 
+	public List<KeyCode> forbidenKeys;
+
 	void Awake()
 	{
 		Players = new List<HumanPlayer>()
 		{
+			/*
 			new HumanPlayer() { keyCode = KeyCode.A },
 			new HumanPlayer() { keyCode = KeyCode.S },
 			new HumanPlayer() { keyCode = KeyCode.D },
@@ -41,6 +44,15 @@ public class PlayerController : MonoBehaviour
 			new HumanPlayer() { keyCode = KeyCode.H },
 			new HumanPlayer() { keyCode = KeyCode.J },
 			new HumanPlayer() { keyCode = KeyCode.K },
+			*/
+			new HumanPlayer() { keyCode = KeyCode.None },
+			new HumanPlayer() { keyCode = KeyCode.None },
+			new HumanPlayer() { keyCode = KeyCode.None },
+			new HumanPlayer() { keyCode = KeyCode.None },
+			new HumanPlayer() { keyCode = KeyCode.None },
+			new HumanPlayer() { keyCode = KeyCode.None },
+			new HumanPlayer() { keyCode = KeyCode.None },
+			new HumanPlayer() { keyCode = KeyCode.None },
 		};
 	}
 
@@ -66,6 +78,7 @@ public class PlayerController : MonoBehaviour
 			player.awkwardness = 0f;
 			player.isDead = false;
 			player.isActive = false;
+			player.keyCode = KeyCode.None;
 		}
 
 		for (int i = 0; i < awkwardnessSliders.Count; i++)
@@ -73,7 +86,6 @@ public class PlayerController : MonoBehaviour
 			var player = Players[i];
 			awkwardnessSliders[i].value = 0f;
 			awkwardnessSliderText[i].color = Color.black;
-			awkwardnessSliderText[i].text = player.keyCode.ToString();
 			awkwardnessSliderBacks[i].color = player.isActive ? Color.white : Color.gray;
 		}
 	}
@@ -97,37 +109,59 @@ public class PlayerController : MonoBehaviour
 
 	public void CheckPlayers()
 	{
+		// activate new players
+		if (GameController.I.IsStarting && Input.anyKeyDown)
+		{
+			foreach(KeyCode kcode in System.Enum.GetValues(typeof(KeyCode)))
+			{
+				if (!forbidenKeys.Contains(kcode) && Input.GetKeyDown(kcode) && !Players.Exists(p => p.keyCode == kcode))
+				{
+					Debug.Log("KeyCode down: " + kcode);
+					var activatedPlayer = Players.Find(p => !p.isActive);
+					activatedPlayer.keyCode = kcode;
+					activatedPlayer.isActive = true;
+					activatedPlayer.isStanding = true;
+					activatedPlayer.justActivated = true;
+
+					var seat = StandsView.I.At(activatedPlayer.x, activatedPlayer.y);
+					seat.playedId = Players.FindIndex(p => p == activatedPlayer);
+					seat.InvertColor();
+					seat.DeactivateAccessories();
+					awkwardnessSliderBacks[seat.playedId].color = Color.white;
+				}
+			}
+		}
+
 		int alivePlayers = 0, activePlayers = 0;
 		for (int i = 0; i < Players.Count; i++)
 		{
 			var player = Players[i];
-			if (player.isDead)
+			if (player.isDead || !player.isActive)
 				continue;
 			
-			if (Input.GetKeyDown(player.keyCode))
+			if (Input.GetKeyDown(player.keyCode) && !player.justActivated)
 			{
-				if (!GameController.I.IsStarting && player.isActive)
+				player.isStanding = !player.isStanding;
+			}
+
+			// do we need to deactivate this one
+			if (GameController.I.IsStarting && Input.GetKeyDown(player.keyCode))
+			{
+				if (player.justActivated)
 				{
-					player.isStanding = !player.isStanding;
+					player.justActivated = false;
 				}
-				if (GameController.I.IsStarting)
+				else
 				{
-					player.isActive = !player.isActive;
-					player.isStanding = player.isActive;
+					Debug.Log("DEACTIVATE" + player.keyCode);
+					player.isActive = false;
+					player.isStanding = false;
 					var seat = StandsView.I.At(player.x, player.y);
-					if(player.isActive)
-					{
-						seat.playedId = i;
-						seat.InvertColor();
-						seat.DeactivateAccessories();
-						awkwardnessSliderBacks[i].color = Color.white;
-					}
-					else
-					{
-						seat.playedId = -1;
-						seat.ResetColor();
-						awkwardnessSliderBacks[i].color = Color.gray;
-					}
+
+					seat.playedId = -1;
+					player.keyCode = KeyCode.None;
+					seat.ResetColor();
+					awkwardnessSliderBacks [i].color = Color.gray;
 				}
 			}
 
@@ -161,6 +195,7 @@ public class PlayerController : MonoBehaviour
 			{
 				GameController.I.SwitchToEndGame(activePlayers > 1 ? -1 : -2);
 			}
+			return;
 		}
 	}
 
@@ -168,7 +203,10 @@ public class PlayerController : MonoBehaviour
 	{
 		for (int i = 0; i < Players.Count; i++)
 		{
-			awkwardnessSliders[i].value = Players[i].awkwardness / maxAwkwardness;
+			var player = Players[i];
+			awkwardnessSliders[i].value = player.awkwardness / maxAwkwardness;
+
+			awkwardnessSliderText[i].text = player.isActive ? player.keyCode.ToString() : "ANY KEY";
 		}
 	}
 }

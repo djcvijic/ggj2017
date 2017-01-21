@@ -408,6 +408,7 @@ MonoBehaviour:
   - {fileID: 1997107382}
   - {fileID: 1275402039}
   maxAwkwardness: 1
+  forbidenKeys: 200000001b000000
 --- !u!114 &151561799
 MonoBehaviour:
   m_ObjectHideFlags: 0

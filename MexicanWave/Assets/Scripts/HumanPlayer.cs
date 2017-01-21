@@ -12,6 +12,7 @@ public class HumanPlayer
 
 	public bool isStanding;
 	public KeyCode keyCode;
+	public bool justActivated;
 
 	public float awkwardness;
 	public bool isDead;
