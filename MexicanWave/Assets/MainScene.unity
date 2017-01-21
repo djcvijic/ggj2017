@@ -144,13 +144,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb1807b3cb54406ab8fcc31245181a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSpeed: 8
+  defaultSpeed: 10
   defaultRange: 3
   defaultBounces: 0
   defaultGoingRight: 1
   positionMin: -7.8
   positionMax: 7.8
   defaultOffset: 0.4
+  gaussCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0.0011606775
+      value: 4.984512
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    - time: 0.5102997
+      value: 13.992956
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1.002304
+      value: 5.0196676
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &353768661
 GameObject:
   m_ObjectHideFlags: 0

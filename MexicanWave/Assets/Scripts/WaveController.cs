@@ -32,6 +32,8 @@ public class WaveController : MonoBehaviour
 
 	public float defaultOffset;
 
+	public AnimationCurve gaussCurve;
+
 	public void ClearWaves()
 	{
 		allWaves.Clear();
@@ -45,6 +47,12 @@ public class WaveController : MonoBehaviour
 	public void AddWave(float range, float speed, int bounces = 0, bool goingRight = true)
 	{
 		var wave = new Wave(range, speed, bounces, goingRight);
+		allWaves.Add(wave);
+	}
+
+	public void AddGaussWave()
+	{
+		var wave = new Wave(gaussCurve, defaultRange, defaultBounces, defaultGoingRight);
 		allWaves.Add(wave);
 	}
 

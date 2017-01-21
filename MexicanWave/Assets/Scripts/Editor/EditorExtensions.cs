@@ -30,6 +30,14 @@ public class EditorExtensions
 		WaveController.I.AddWave(3f, 12f, 1, false);
 	}
 
+	[MenuItem("GGJ2017/Add gauss wave")]
+	private static void AddGaussWave()
+	{
+		if (!Application.isPlaying)
+			return;
+		WaveController.I.AddGaussWave();
+	}
+
 	[MenuItem("GGJ2017/Clear all waves")]
 	private static void ClearAllWaves()
 	{
