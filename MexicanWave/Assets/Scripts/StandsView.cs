@@ -3,6 +3,14 @@ using System.Collections.Generic;
 
 public class StandsView : MonoBehaviour
 {
+	private static readonly Color[] TeamColors =
+	{
+		Color.black,
+		Color.white,
+		Color.red,
+		Color.yellow,
+		Color.blue,
+	};
 
 
 	#region Singleton
@@ -29,6 +37,14 @@ public class StandsView : MonoBehaviour
 
 	public void Reinitialize()
 	{
+		var firstColor = TeamColors[Mathf.FloorToInt(Random.value * TeamColors.Length)];
+		var secondColor = firstColor;
+		while (secondColor == firstColor)
+		{
+			secondColor = TeamColors[Mathf.FloorToInt(Random.value * TeamColors.Length)];
+		}
+		Color[] colorCombo = { firstColor, secondColor };
+
 		// remove existing seats
 		foreach(var seats in allSeats)
 			seats.gameObject.SetActive(false);
@@ -51,7 +67,10 @@ public class StandsView : MonoBehaviour
 					allSeats.Add(singleSeat);
 				}
 
-				singleSeat.Init(i, j);
+				var randomBlend = Random.value;
+				var color = colorCombo[0] * randomBlend + colorCombo[1] * (1 - randomBlend);
+
+				singleSeat.Init(i, j, color);
 				singleSeat.transform.parent = parentContainer;
 				singleSeat.transform.localPosition = new Vector2(i, j);
 			}
