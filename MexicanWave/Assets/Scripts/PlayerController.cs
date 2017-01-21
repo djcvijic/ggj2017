@@ -29,31 +29,13 @@ public class PlayerController : MonoBehaviour
 
 	public float maxAwkwardness = 1f;
 
-	public List<KeyCode> forbidenKeys;
-
 	void Awake()
 	{
-		Players = new List<HumanPlayer>()
+		Players = new List<HumanPlayer>();
+		for (int i = 0; i < 8; i++)
 		{
-			/*
-			new HumanPlayer() { keyCode = KeyCode.A },
-			new HumanPlayer() { keyCode = KeyCode.S },
-			new HumanPlayer() { keyCode = KeyCode.D },
-			new HumanPlayer() { keyCode = KeyCode.F },
-			new HumanPlayer() { keyCode = KeyCode.G },
-			new HumanPlayer() { keyCode = KeyCode.H },
-			new HumanPlayer() { keyCode = KeyCode.J },
-			new HumanPlayer() { keyCode = KeyCode.K },
-			*/
-			new HumanPlayer() { keyCode = KeyCode.None },
-			new HumanPlayer() { keyCode = KeyCode.None },
-			new HumanPlayer() { keyCode = KeyCode.None },
-			new HumanPlayer() { keyCode = KeyCode.None },
-			new HumanPlayer() { keyCode = KeyCode.None },
-			new HumanPlayer() { keyCode = KeyCode.None },
-			new HumanPlayer() { keyCode = KeyCode.None },
-			new HumanPlayer() { keyCode = KeyCode.None },
-		};
+			Players.Add(new HumanPlayer() { keyCode = KeyCode.None });
+		}
 	}
 
 	public void PickPlayers()
@@ -114,7 +96,10 @@ public class PlayerController : MonoBehaviour
 		{
 			foreach(KeyCode kcode in System.Enum.GetValues(typeof(KeyCode)))
 			{
-				if (!forbidenKeys.Contains(kcode) && Input.GetKeyDown(kcode) && !Players.Exists(p => p.keyCode == kcode))
+				if (kcode == KeyCode.Escape || kcode == KeyCode.Space 
+					|| (kcode >= KeyCode.JoystickButton0 && kcode <= KeyCode.JoystickButton19))
+					continue;
+				if (Input.GetKeyDown(kcode) && !Players.Exists(p => p.keyCode == kcode))
 				{
 					Debug.Log("KeyCode down: " + kcode);
 					var activatedPlayer = Players.Find(p => !p.isActive);
@@ -175,7 +160,6 @@ public class PlayerController : MonoBehaviour
 					if (player.awkwardness >= maxAwkwardness)
 					{
 						player.isDead = true;
-						awkwardnessSliderText[i].text = "DEAD";
 						awkwardnessSliderText[i].color = Color.white;
 					}
 				}
@@ -206,7 +190,8 @@ public class PlayerController : MonoBehaviour
 			var player = Players[i];
 			awkwardnessSliders[i].value = player.awkwardness / maxAwkwardness;
 
-			awkwardnessSliderText[i].text = player.isActive ? player.keyCode.ToString() : "ANY KEY";
+			awkwardnessSliderText[i].text = player.isDead ? "DEAD" :
+				(player.isActive ? player.keyCode.ToString() : "ANY KEY");
 		}
 	}
 }
