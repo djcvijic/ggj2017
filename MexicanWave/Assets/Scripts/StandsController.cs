@@ -22,7 +22,6 @@ public class StandsController : MonoBehaviour
 
 	public int width;
 	public int height;
-	public int numberOfPlayers = 1;
 
 	public float[,] Seats { get; private set; }
 
@@ -36,7 +35,7 @@ public class StandsController : MonoBehaviour
 			var columnValue = WaveController.I.CalculateInfluence(i);
 			for (int j = 0; j < height; j++)
 			{
-				if (PlayerController.I.ActivePlayers.Exists(p => p.x == i && p.y == j))
+				if (PlayerController.I.Players.Exists(p => p.x == i && p.y == j))
 				{
 					RandomOffset[i, j] = 0f;
 				}
@@ -56,7 +55,7 @@ public class StandsController : MonoBehaviour
 		PlayerController.I.CheckPlayers();
 	}
 
-	public void StartNewGame(int w, int h, int players)
+	public void StartNewGame(int w, int h)
 	{
 		RandomOffset = new float[w,h];
 		Seats = new float[w,h];
@@ -70,12 +69,12 @@ public class StandsController : MonoBehaviour
 		}
 		StandsView.I.Reinitialize();
 		WaveController.I.ClearWaves();
-		PlayerController.I.ActivatePlayers(players);
+		PlayerController.I.PickPlayers();
 	}
 
 	public void StartNewGame()
 	{
-		StartNewGame(width, height, numberOfPlayers);
+		StartNewGame(width, height);
 	}
 
 	public float Value(int x, int y)

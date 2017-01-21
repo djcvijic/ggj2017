@@ -8,6 +8,8 @@ public class HumanPlayer
 	public int x;
 	public int y;
 
+	public bool isActive;
+
 	public bool isStanding;
 	public KeyCode keyCode;
 

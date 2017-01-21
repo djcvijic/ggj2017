@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
 	public void SwithToStartingGame()
 	{
 		CurrentState = State.StartingGame;
-		infoText.text = "press SPACE to play game";
+		infoText.text = "press SPACE when ready";
 		infoPanel.gameObject.SetActive(true);
 		StandsController.I.StartNewGame();
 	}
@@ -53,6 +53,7 @@ public class GameController : MonoBehaviour
 	{
 		CurrentState = State.Playing;
 		infoPanel.gameObject.SetActive(false);
+		PlayerController.I.PrepareForStart();
 	}
 
 	public void SwitchToEndGame(int winner)

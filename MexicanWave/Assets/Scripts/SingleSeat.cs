@@ -21,6 +21,8 @@ public class SingleSeat : MonoBehaviour
 	private Transform myAccessory;
 	private Vector3 initialAccessoryPosition;
 
+	private Color oldColor;
+
 	void Awake()
 	{
 		myRenderer = myHuman.GetComponent<SpriteRenderer>();
@@ -58,7 +60,7 @@ public class SingleSeat : MonoBehaviour
 
 	public void InvertColor()
 	{
-		var myColor = myRenderer.color;
+		var myColor = oldColor = myRenderer.color;
 		var currentBrightness = (myColor.r + myColor.g + myColor.b) / 3;
 
 		var inverseColor = Color.white - myColor;
@@ -68,8 +70,11 @@ public class SingleSeat : MonoBehaviour
 		inverseColor.a = 1.0f;
 
 		myRenderer.color = inverseColor;
+	}
 
-
+	public void ResetColor()
+	{
+		myRenderer.color = oldColor;
 	}
 
 	public void DeactivateAccessories()
@@ -96,7 +101,7 @@ public class SingleSeat : MonoBehaviour
 		myRenderer.sprite = humanSprites[index];
 		if (playedId > -1)
 		{
-			myRenderer.enabled = !PlayerController.I.ActivePlayers [playedId].isDead;
+			myRenderer.enabled = !PlayerController.I.Players [playedId].isDead;
 		}
 
 		if (myAccessory != null)

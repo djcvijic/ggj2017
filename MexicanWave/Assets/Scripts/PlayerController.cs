@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
 	#endregion
 
 	public List<HumanPlayer> Players { get; private set; }
-	public List<HumanPlayer> ActivePlayers { get; private set; }
 
 	public List<Slider> awkwardnessSliders;
 	public List<Image> awkwardnessSliderBacks;
@@ -43,61 +42,88 @@ public class PlayerController : MonoBehaviour
 			new HumanPlayer() { keyCode = KeyCode.J },
 			new HumanPlayer() { keyCode = KeyCode.K },
 		};
-		ActivePlayers = new List<HumanPlayer>();
 	}
 
-	public void ActivatePlayers(int count)
+	public void PickPlayers()
 	{
 		var centerX = StandsController.I.width / 2;
 		var centerY = StandsController.I.height / 2;
-		ActivePlayers = Players.GetRange(0, count);
-		ActivePlayers.ForEach(p => p.x = p.y = 0);
-		for (int i = 0; i < ActivePlayers.Count; i++)
+		Players.ForEach(p => p.x = p.y = 0);
+		for (int i = 0; i < Players.Count; i++)
 		{
-			var player = ActivePlayers[i];
+			var player = Players[i];
 			int x, y;
 			do
 			{
 				x = Random.Range(centerX - 4, centerX + 4);
 				y = Random.Range(centerY - 2, centerY + 2);
-			} while (ActivePlayers.Exists(p => p.x == x && p.y == y));
+			} while (Players.Exists(p => p.isActive && p.x == x && p.y == y));
 			player.x = x;
 			player.y = y;
 			var seat = StandsView.I.At(x, y);
-			seat.playedId = i;
-			seat.InvertColor();
-			seat.DeactivateAccessories();
 			player.isStanding = false;
+			seat.DeactivateAccessories();
 			player.awkwardness = 0f;
 			player.isDead = false;
 		}
 
 		for (int i = 0; i < awkwardnessSliders.Count; i++)
 		{
+			var player = Players[i];
 			awkwardnessSliders[i].value = 0f;
 			awkwardnessSliderText[i].color = Color.black;
-			awkwardnessSliderText[i].text = Players[i].keyCode.ToString();
-			awkwardnessSliderBacks[i].color = i < count ? Color.white : Color.gray;
+			awkwardnessSliderText[i].text = player.keyCode.ToString();
+			awkwardnessSliderBacks[i].color = player.isActive ? Color.white : Color.gray;
+		}
+	}
+
+	public void PrepareForStart()
+	{
+		for (int i = 0; i < Players.Count; i++)
+		{
+			var player = Players[i];
+			if (player.isActive)
+			{
+				player.isStanding = false;
+			}
 		}
 	}
 
 	public float StandingValue(int id)
 	{
-		return ActivePlayers[id].isStanding ? 1f : 0f;
+		return Players[id].isStanding ? 1f : 0f;
 	}
 
 	public void CheckPlayers()
 	{
 		int alivePlayers = 0;
-		for (int i = 0; i < ActivePlayers.Count; i++)
+		for (int i = 0; i < Players.Count; i++)
 		{
-			var player = ActivePlayers[i];
+			var player = Players[i];
 			if (player.isDead)
 				continue;
 			
 			if (Input.GetKeyDown(player.keyCode))
 			{
 				player.isStanding = !player.isStanding;
+				if (!GameController.I.IsPlaying)
+				{
+					player.isActive = !player.isActive;
+					var seat = StandsView.I.At(player.x, player.y);
+					if(player.isActive)
+					{
+						seat.playedId = i;
+						seat.InvertColor();
+						seat.DeactivateAccessories();
+						awkwardnessSliderBacks[i].color = Color.white;
+					}
+					else
+					{
+						seat.playedId = -1;
+						seat.ResetColor();
+						awkwardnessSliderBacks[i].color = Color.gray;
+					}
+				}
 			}
 
 			// check if player is in right position
@@ -122,7 +148,7 @@ public class PlayerController : MonoBehaviour
 		{
 			if (alivePlayers == 1)
 			{
-				var winner = ActivePlayers.FindIndex(p => !p.isDead);
+				var winner = Players.FindIndex(p => !p.isDead);
 				GameController.I.SwitchToEndGame(winner);
 			} else if (alivePlayers == 0)
 			{
@@ -134,9 +160,9 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		for (int i = 0; i < ActivePlayers.Count; i++)
+		for (int i = 0; i < Players.Count; i++)
 		{
-			awkwardnessSliders[i].value = ActivePlayers[i].awkwardness / maxAwkwardness;
+			awkwardnessSliders[i].value = Players[i].awkwardness / maxAwkwardness;
 		}
 	}
 }
