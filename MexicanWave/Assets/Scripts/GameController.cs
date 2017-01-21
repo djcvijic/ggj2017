@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
 	public void SwithToStartingGame()
 	{
 		CurrentState = State.StartingGame;
-		infoText.text = "press SPACE when ready";
+		infoText.text = "Activate players, press SPACE when ready";
 		infoPanel.gameObject.SetActive(true);
 		StandsController.I.StartNewGame();
 	}
@@ -68,7 +68,7 @@ public class GameController : MonoBehaviour
 	{
 		if (CurrentState == State.StartingGame)
 		{
-			if (Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetKeyDown(KeyCode.Space) && PlayerController.I.Players.Exists(p => p.isActive))
 			{
 				SwitchToPlaying();
 			}
