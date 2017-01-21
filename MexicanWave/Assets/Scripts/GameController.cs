@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
 
 	public State CurrentState { get; private set; }
 	public bool IsPlaying { get { return CurrentState == State.Playing; } }
+	public bool IsStarting { get { return CurrentState == State.StartingGame; } }
 
 	void Start()
 	{

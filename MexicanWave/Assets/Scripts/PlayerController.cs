@@ -106,10 +106,14 @@ public class PlayerController : MonoBehaviour
 			
 			if (Input.GetKeyDown(player.keyCode))
 			{
-				player.isStanding = !player.isStanding;
-				if (!GameController.I.IsPlaying)
+				if (!GameController.I.IsStarting && player.isActive)
+				{
+					player.isStanding = !player.isStanding;
+				}
+				if (GameController.I.IsStarting)
 				{
 					player.isActive = !player.isActive;
+					player.isStanding = player.isActive;
 					var seat = StandsView.I.At(player.x, player.y);
 					if(player.isActive)
 					{
