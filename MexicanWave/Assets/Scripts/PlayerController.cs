@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
 			}
 
 			// check if player is in right position
-			if (GameController.I.IsPlaying)
+			if (GameController.I.IsPlaying && player.isActive)
 			{
 				var val = StandsController.I.Seats [player.x, player.y];
 				if ((val <= 0.3f && player.isStanding) || (val >= 0.7f && !player.isStanding))

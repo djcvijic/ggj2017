@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour
 		infoText.text = "Activate players, press SPACE when ready";
 		infoPanel.gameObject.SetActive(true);
 		StandsController.I.StartNewGame();
+		WaveGenerator.I.Reset();
 	}
 
 	public void SwitchToPlaying()
@@ -53,6 +54,7 @@ public class GameController : MonoBehaviour
 		CurrentState = State.Playing;
 		infoPanel.gameObject.SetActive(false);
 		PlayerController.I.PrepareForStart();
+		WaveController.I.StartFirstWave();
 	}
 
 	public void SwitchToEndGame(int winner)

@@ -26,8 +26,8 @@ public class EditorExtensions
 	{
 		if (!Application.isPlaying)
 			return;
-		WaveController.I.AddWave(3f, 12f, 1, true, Random.value);
-		WaveController.I.AddWave(3f, 12f, 1, false, Random.value);
+		WaveController.I.AddWave(12f, 3f, 1, true, Random.value);
+		WaveController.I.AddWave(12f, 3f, 1, false, Random.value);
 	}
 
 	[MenuItem("GGJ2017/Add gauss wave")]

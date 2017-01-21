@@ -42,18 +42,18 @@ public class WaveController : MonoBehaviour
 
 	public void AddSimpleWave()
 	{
-		AddWave(defaultRange, defaultSpeed, defaultBounces, defaultGoingRight, defaultTimeToStart);
+		AddWave(defaultSpeed, defaultRange, defaultBounces, defaultGoingRight, defaultTimeToStart, true);
 	}
 
-	public void AddWave(float range, float speed, int bounces = 0, bool goingRight = true, float timeToStart = 0f)
+	public void AddWave(float speed, float range, int bounces = 0, bool goingRight = true, float timeToStart = 0f, bool testWave = false)
 	{
-		var wave = new Wave(range, speed, bounces, goingRight, timeToStart);
+		var wave = new Wave(speed, range, bounces, goingRight, timeToStart, testWave);
 		allWaves.Add(wave);
 	}
 
 	public void AddGaussWave()
 	{
-		var wave = new Wave(gaussCurve, defaultRange, defaultBounces, defaultGoingRight, defaultTimeToStart);
+		var wave = new Wave(gaussCurve, defaultRange, defaultBounces, defaultGoingRight, defaultTimeToStart, true);
 		allWaves.Add(wave);
 	}
 
@@ -81,10 +81,19 @@ public class WaveController : MonoBehaviour
 		return influence;
 	}
 
+	public void StartFirstWave()
+	{
+		allWaves.AddRange(WaveGenerator.I.GetNextLevel());
+	}
+
 	public void WaveEnded(Wave wave)
 	{
 		Debug.Log("Wave ended");
 		allWaves.Remove(wave);
+		if (!wave.testWave && allWaves.Count == 0)
+		{
+			allWaves.AddRange(WaveGenerator.I.GetNextLevel());
+		}
 	}
 
 }

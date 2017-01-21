@@ -15,6 +15,7 @@ public class Wave
 	private bool goingRight;
 	private float timeToStart;
 	public AnimationCurve speedCurve;
+	public bool testWave;
 
 	public float Speed
 	{
@@ -30,7 +31,7 @@ public class Wave
 		}
 	}
 
-	public Wave(float range, float speed, int remainingBounces, bool initialRight = true, float timeToStart = 0f)
+	public Wave(float speed, float range, int remainingBounces, bool initialRight = true, float timeToStart = 0f, bool testWave = false)
 	{
 		this.centerPosition = initialRight ? WaveController.I.positionMin - range : WaveController.I.positionMax + range;
 		this.range = range;
@@ -38,22 +39,23 @@ public class Wave
 		this.remainingBounces = remainingBounces;
 		this.goingRight = initialRight;
 		this.speedCurve = null;
-		this.timeToStart = timeToStart;
+		this.timeToStart = timeToStart >= 0f ? timeToStart : Random.value;
 	}
 
-	public Wave(AnimationCurve speed, float range, int remainingBounces = 0, bool initialRight = true, float timeToStart = 0f)
+	public Wave(AnimationCurve speed, float range, int remainingBounces = 0, bool initialRight = true, float timeToStart = 0f, bool testWave = false)
 	{
 		this.centerPosition = initialRight ? WaveController.I.positionMin - range : WaveController.I.positionMax + range;
 		this.speedCurve = speed;
 		this.range = range;
 		this.remainingBounces = remainingBounces;
 		this.goingRight = initialRight;
-		this.timeToStart = timeToStart;
+		this.timeToStart = timeToStart >= 0f ? timeToStart : Random.value;
+		this.testWave = testWave;
 	}
 
 	public void UpdateWave()
 	{
-		if (timeToStart - Time.deltaTime > 0f)
+		if (timeToStart > 0f && timeToStart - Time.deltaTime > 0f)
 		{
 			timeToStart -= Time.deltaTime;
 			return;
@@ -89,7 +91,7 @@ public class Wave
 		}
 		else
 		{
-			remainingBounces--;
+			if (remainingBounces != -1) remainingBounces--;
 			goingRight = !goingRight;
 		}
 	}

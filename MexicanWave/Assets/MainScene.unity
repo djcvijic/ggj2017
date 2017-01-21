@@ -291,10 +291,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 151561796}
+  - 114: {fileID: 151561799}
   - 114: {fileID: 151561795}
   - 114: {fileID: 151561797}
   - 114: {fileID: 151561798}
-  - 114: {fileID: 151561799}
+  - 114: {fileID: 151561800}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -315,7 +316,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 16
   height: 8
-  numberOfPlayers: 8
 --- !u!4 &151561796
 Transform:
   m_ObjectHideFlags: 0
@@ -421,7 +421,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infoPanel: {fileID: 1856219656}
   infoText: {fileID: 593254744}
-  CurrentState: 0
+--- !u!114 &151561800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 151561794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8121b72a820746deb383baa6b24d6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levels:
+  - level: 0
+    waves:
+    - range: 3
+      speed: 5
+      remainingBounces: 2
+      goingRight: 1
+      goingRandom: 1
+      timeToStart: 1
+  - level: 1
+    waves:
+    - range: 3
+      speed: 7
+      remainingBounces: 3
+      goingRight: 1
+      goingRandom: 0
+      timeToStart: -1
+  - level: 2
+    waves:
+    - range: 3
+      speed: 5
+      remainingBounces: 1
+      goingRight: 1
+      goingRandom: 0
+      timeToStart: -1
+    - range: 3
+      speed: 5
+      remainingBounces: 2
+      goingRight: 0
+      goingRandom: 0
+      timeToStart: -1
+  - level: 3
+    waves:
+    - range: 3
+      speed: 9
+      remainingBounces: 4
+      goingRight: 1
+      goingRandom: 1
+      timeToStart: 0
+  - level: 4
+    waves:
+    - range: 3
+      speed: 11
+      remainingBounces: 2
+      goingRight: 1
+      goingRandom: 1
+      timeToStart: -1
 --- !u!114 &238309012 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000011290767280, guid: 30d604777e72a481da64219cd459a82b,
@@ -1870,49 +1927,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 421245384}
   m_RootOrder: 0
---- !u!1001 &2104934731
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4000012681375550, guid: bb8e10d21d1db4f24a43fa455a8b299f, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012681375550, guid: bb8e10d21d1db4f24a43fa455a8b299f, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012681375550, guid: bb8e10d21d1db4f24a43fa455a8b299f, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012681375550, guid: bb8e10d21d1db4f24a43fa455a8b299f, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012681375550, guid: bb8e10d21d1db4f24a43fa455a8b299f, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012681375550, guid: bb8e10d21d1db4f24a43fa455a8b299f, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012681375550, guid: bb8e10d21d1db4f24a43fa455a8b299f, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012681375550, guid: bb8e10d21d1db4f24a43fa455a8b299f, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000011265415566, guid: bb8e10d21d1db4f24a43fa455a8b299f, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: bb8e10d21d1db4f24a43fa455a8b299f, type: 2}
-  m_IsPrefabParent: 0
