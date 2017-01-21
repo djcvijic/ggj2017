@@ -23,28 +23,60 @@ public class StandsController : MonoBehaviour
 	public int width;
 	public int height;
 
-	private float[,] seats;
+	public float[,] Seats { get; private set; }
+
+	public float[,] RandomOffset { get; private set; }
 
 	public void Start()
 	{
-		StartNewGame(width, height);
-		StandsView.I.Reinitialize();
+		StartNewGame();
 	}
 
-	public void StartNewGame(int w, int h)
+	void Update()
 	{
-		seats = new float[w,h];
-		for (int i = 0; i < w; i++)
+		// update stands depending on waves
+		for (int i = 0; i < width; i++)
 		{
-			for (int j = 0; j < h; j++)
+			var columnValue = WaveController.I.CalculateInfluence(i);
+			for (int j = 0; j < height; j++)
 			{
-				seats[i, j] = 0f;
+				if (columnValue > 0 && RandomOffset [i, j] == 0f)
+				{
+					RandomOffset[i, j] = Random.value * WaveController.I.defaultOffset;
+				}
+				else if (columnValue == 0 && RandomOffset [i, j] != 0f)
+				{
+					RandomOffset[i, j] = 0f;
+				}
+				Seats[i, j] = columnValue + RandomOffset[i, j];
 			}
 		}
 	}
 
+	public void StartNewGame(int w, int h)
+	{
+		RandomOffset = new float[w,h];
+		Seats = new float[w,h];
+		for (int i = 0; i < w; i++)
+		{
+			for (int j = 0; j < h; j++)
+			{
+				//Seats[i, j] = i *1f / w;
+				Seats[i, j] = 0f;
+			}
+		}
+		StandsView.I.Reinitialize();
+		WaveController.I.ClearWaves();
+	}
+
+	public void StartNewGame()
+	{
+		StartNewGame(width, height);
+	}
+
 	public float Value(int x, int y)
 	{
-		return seats[x, y];
+		return Seats[x, y];
 	}
+
 }
