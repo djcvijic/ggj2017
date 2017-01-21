@@ -46,13 +46,10 @@ public class SingleSeat : MonoBehaviour
 	{
 		var myColor = myRenderer.color;
 		var currentBrightness = (myColor.r + myColor.g + myColor.b) / 3;
-		Debug.Log(currentBrightness);
 
 		var inverseColor = Color.white - myColor;
 		var newBrightness = (inverseColor.r + inverseColor.g + inverseColor.b) / 3;
-		Debug.Log(newBrightness);
 		var brightnessQuotient = currentBrightness / newBrightness;
-		Debug.Log(brightnessQuotient);
 		inverseColor *= brightnessQuotient;
 		inverseColor.a = 1.0f;
 

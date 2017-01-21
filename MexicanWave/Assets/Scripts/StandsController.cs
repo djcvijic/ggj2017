@@ -41,13 +41,19 @@ public class StandsController : MonoBehaviour
 			var columnValue = WaveController.I.CalculateInfluence(i);
 			for (int j = 0; j < height; j++)
 			{
-				if (columnValue > 0 && RandomOffset [i, j] == 0f)
-				{
-					RandomOffset[i, j] = Random.value * WaveController.I.defaultOffset;
-				}
-				else if (columnValue == 0 && RandomOffset [i, j] != 0f)
+				if (PlayerController.I.ActivePlayers.Exists(p => p.x == i && p.y == j))
 				{
 					RandomOffset[i, j] = 0f;
+				}
+				else
+				{
+					if (columnValue > 0 && RandomOffset[i, j] == 0f)
+					{
+						RandomOffset[i, j] = Random.value * WaveController.I.defaultOffset;
+					} else if (columnValue == 0 && RandomOffset[i, j] != 0f)
+					{
+						RandomOffset[i, j] = 0f;
+					}
 				}
 				Seats[i, j] = columnValue + RandomOffset[i, j];
 			}

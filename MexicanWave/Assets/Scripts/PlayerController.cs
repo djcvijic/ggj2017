@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class PlayerController : MonoBehaviour
 	public List<HumanPlayer> Players { get; private set; }
 	public List<HumanPlayer> ActivePlayers { get; private set; }
 
+	public List<Slider> awkwardnessSliders;
+	public List<Image> awkwardnessSliderBacks;
+	public List<Text> awkwardnessSliderText;
+
 	public float maxAwkwardness = 1f;
 
 	void Awake()
@@ -30,9 +35,13 @@ public class PlayerController : MonoBehaviour
 		Players = new List<HumanPlayer>()
 		{
 			new HumanPlayer() { keyCode = KeyCode.A },
-			new HumanPlayer() { keyCode = KeyCode.L },
+			new HumanPlayer() { keyCode = KeyCode.S },
+			new HumanPlayer() { keyCode = KeyCode.D },
 			new HumanPlayer() { keyCode = KeyCode.F },
+			new HumanPlayer() { keyCode = KeyCode.G },
+			new HumanPlayer() { keyCode = KeyCode.H },
 			new HumanPlayer() { keyCode = KeyCode.J },
+			new HumanPlayer() { keyCode = KeyCode.K },
 		};
 	}
 
@@ -59,7 +68,13 @@ public class PlayerController : MonoBehaviour
 			player.isStanding = false;
 			player.awkwardness = 0f;
 			player.isDead = false;
-			Debug.Log("NEW PLAYER " + x + " " + y);
+		}
+
+		for (int i = 0; i < awkwardnessSliders.Count; i++)
+		{
+			awkwardnessSliders[i].value = 0f;
+			awkwardnessSliderText[i].enabled = false;
+			awkwardnessSliderBacks[i].color = i < count ? Color.white : Color.gray;
 		}
 	}
 
@@ -86,13 +101,20 @@ public class PlayerController : MonoBehaviour
 			if ((val <= 0.3f && player.isStanding) || (val >= 0.7f && !player.isStanding))
 			{
 				player.awkwardness += Time.deltaTime;
-				Debug.Log(player.awkwardness + "  " + (player.isStanding ? "STANDING!" : "SITTING!"));
 				if (player.awkwardness >= maxAwkwardness)
 				{
 					player.isDead = true;
-					Debug.Log("DEAD");
+					awkwardnessSliderText[i].enabled = true;
 				}
 			}
+		}
+	}
+
+	void Update()
+	{
+		for (int i = 0; i < ActivePlayers.Count; i++)
+		{
+			awkwardnessSliders[i].value = ActivePlayers[i].awkwardness / maxAwkwardness;
 		}
 	}
 }
