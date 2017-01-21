@@ -54,10 +54,12 @@ public class PlayerController : MonoBehaviour
 			} while (ActivePlayers.Exists(p => p.x == x && p.y == y));
 			player.x = x;
 			player.y = y;
+			var seat = StandsView.I.At(x, y);
+			seat.playedId = i;
+			seat.InvertColor();
 			player.isStanding = false;
 			player.awkwardness = 0f;
 			player.isDead = false;
-			StandsView.I.At(x, y).playedId = i;
 			Debug.Log("NEW PLAYER " + x + " " + y);
 		}
 	}

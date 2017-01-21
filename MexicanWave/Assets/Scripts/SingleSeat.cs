@@ -42,6 +42,25 @@ public class SingleSeat : MonoBehaviour
 		myRenderer.enabled = true; 
 	}
 
+	public void InvertColor()
+	{
+		var myColor = myRenderer.color;
+		var currentBrightness = (myColor.r + myColor.g + myColor.b) / 3;
+		Debug.Log(currentBrightness);
+
+		var inverseColor = Color.white - myColor;
+		var newBrightness = (inverseColor.r + inverseColor.g + inverseColor.b) / 3;
+		Debug.Log(newBrightness);
+		var brightnessQuotient = currentBrightness / newBrightness;
+		Debug.Log(brightnessQuotient);
+		inverseColor *= brightnessQuotient;
+		inverseColor.a = 1.0f;
+
+		myRenderer.color = inverseColor;
+
+
+	}
+
 	void Update()
 	{
 		var val = playedId != -1 ? PlayerController.I.StandingValue(playedId) : StandsController.I.Value(x, y);
