@@ -28,11 +28,6 @@ public class StandsController : MonoBehaviour
 
 	public float[,] RandomOffset { get; private set; }
 
-	public void Start()
-	{
-		StartNewGame();
-	}
-
 	void Update()
 	{
 		// update stands depending on waves

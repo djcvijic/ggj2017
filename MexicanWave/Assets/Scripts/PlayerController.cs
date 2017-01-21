@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
 			new HumanPlayer() { keyCode = KeyCode.J },
 			new HumanPlayer() { keyCode = KeyCode.K },
 		};
+		ActivePlayers = new List<HumanPlayer>();
 	}
 
 	public void ActivatePlayers(int count)
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
 
 	public void CheckPlayers()
 	{
+		int alivePlayers = 0;
 		for (int i = 0; i < ActivePlayers.Count; i++)
 		{
 			var player = ActivePlayers[i];
@@ -98,16 +100,33 @@ public class PlayerController : MonoBehaviour
 			}
 
 			// check if player is in right position
-			var val = StandsController.I.Seats[player.x, player.y];
-			if ((val <= 0.3f && player.isStanding) || (val >= 0.7f && !player.isStanding))
+			if (GameController.I.IsPlaying)
 			{
-				player.awkwardness += Time.deltaTime;
-				if (player.awkwardness >= maxAwkwardness)
+				var val = StandsController.I.Seats [player.x, player.y];
+				if ((val <= 0.3f && player.isStanding) || (val >= 0.7f && !player.isStanding))
 				{
-					player.isDead = true;
-					awkwardnessSliderText[i].text = "DEAD";
-					awkwardnessSliderText[i].color = Color.white;
+					player.awkwardness += Time.deltaTime;
+					if (player.awkwardness >= maxAwkwardness)
+					{
+						player.isDead = true;
+						awkwardnessSliderText[i].text = "DEAD";
+						awkwardnessSliderText[i].color = Color.white;
+					}
 				}
+			}
+			if (!player.isDead) { alivePlayers++; }
+		}
+		// check for end game
+		if (GameController.I.IsPlaying)
+		{
+			if (alivePlayers == 1)
+			{
+				var winner = ActivePlayers.FindIndex(p => !p.isDead);
+				GameController.I.SwitchToEndGame(winner);
+			} else if (alivePlayers == 0)
+			{
+				// draw
+				GameController.I.SwitchToEndGame(-1);
 			}
 		}
 	}
