@@ -3,15 +3,17 @@ using System.Collections;
 
 public class SingleSeat : MonoBehaviour
 {
-
 	public int x { get; private set; }
 	public int y { get; private set; }
+	public Sprite[] humanSprites;
 
-	private Renderer myRenderer;
+	private SpriteRenderer myRenderer;
 
 	void Awake()
 	{
-		myRenderer = GetComponentInChildren<Renderer>();
+		myRenderer = transform.Find("Human").GetComponent<SpriteRenderer>();
+		humanSprites = Resources.LoadAll<Sprite>("Sprites/ljudi");
+		//Debug.Log(humanSprites.Length);
 	}
 
 	public void Init(int x, int y)
@@ -23,7 +25,12 @@ public class SingleSeat : MonoBehaviour
 	void Update()
 	{
 		var val = StandsController.I.Value(x, y);
-		myRenderer.material.color = new Color(val, 0.5f, 0.2f, 1f);
+		//myRenderer.material.color = new Color(val, 0.5f, 0.5f, 0.5f);
+
+		int index = Mathf.FloorToInt(humanSprites.Length * val);
+		if (index >= humanSprites.Length) index = humanSprites.Length - 1;
+		//Debug.Log(index);
+		myRenderer.sprite = humanSprites[index];
 	}
 
 }
