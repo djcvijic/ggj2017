@@ -22,6 +22,7 @@ public class StandsController : MonoBehaviour
 
 	public int width;
 	public int height;
+	public int numberOfPlayers = 1;
 
 	public float[,] Seats { get; private set; }
 
@@ -54,7 +55,7 @@ public class StandsController : MonoBehaviour
 		PlayerController.I.CheckPlayers();
 	}
 
-	public void StartNewGame(int w, int h)
+	public void StartNewGame(int w, int h, int players)
 	{
 		RandomOffset = new float[w,h];
 		Seats = new float[w,h];
@@ -68,12 +69,12 @@ public class StandsController : MonoBehaviour
 		}
 		StandsView.I.Reinitialize();
 		WaveController.I.ClearWaves();
-		PlayerController.I.ActivatePlayers(2);
+		PlayerController.I.ActivatePlayers(players);
 	}
 
 	public void StartNewGame()
 	{
-		StartNewGame(width, height);
+		StartNewGame(width, height, numberOfPlayers);
 	}
 
 	public float Value(int x, int y)

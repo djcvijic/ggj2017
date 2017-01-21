@@ -68,8 +68,14 @@ public class PlayerController : MonoBehaviour
 			var player = activePlayers[i];
 			if (Input.GetKeyDown(player.keyCode))
 			{
-				Debug.Log(player.isStanding ? "SIT" : "STAND");
 				player.isStanding = !player.isStanding;
+			}
+
+			// check if player is in right position
+			var val = StandsController.I.Seats[player.x, player.y];
+			if ((val <= 0.1f && player.isStanding) || (val >= 0.9f && !player.isStanding))
+			{
+				Debug.Log(player.isStanding ? "STANDING!" : "SITTING!");
 			}
 		}
 	}

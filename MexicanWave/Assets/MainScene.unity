@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 16
   height: 8
+  numberOfPlayers: 1
 --- !u!4 &151561796
 Transform:
   m_ObjectHideFlags: 0
@@ -145,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb1807b3cb54406ab8fcc31245181a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSpeed: 10
+  defaultSpeed: 8
   defaultRange: 3
   defaultBounces: 0
   defaultGoingRight: 1
