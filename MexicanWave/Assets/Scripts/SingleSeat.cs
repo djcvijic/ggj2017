@@ -18,11 +18,11 @@ public class SingleSeat : MonoBehaviour
 		//Debug.Log(humanSprites.Length);
 	}
 
-	public void Init(int x, int y)
+	public void Init(int x, int y, Color color)
 	{
 		this.x = x;
 		this.y = y;
-		myRenderer.color = new Color(Random.value, Random.value, Random.value);
+		myRenderer.color = color;
 		playedId = -1;
 	}
 
