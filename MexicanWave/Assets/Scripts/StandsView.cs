@@ -5,7 +5,7 @@ public class StandsView : MonoBehaviour
 {
 	private static readonly Color[] TeamColors =
 	{
-		Color.black,
+		Color.gray,
 		Color.white,
 		Color.red,
 		Color.yellow,
@@ -32,6 +32,9 @@ public class StandsView : MonoBehaviour
 
 	public GameObject singleSeatPrefab;
 	public Transform parentContainer;
+
+	public float humanJitterHorizontal;
+	public float humanJitterVertical;
 
 	private List<SingleSeat> allSeats = new List<SingleSeat>();
 
@@ -70,7 +73,7 @@ public class StandsView : MonoBehaviour
 				var randomBlend = Random.value;
 				var color = colorCombo[0] * randomBlend + colorCombo[1] * (1 - randomBlend);
 
-				singleSeat.Init(x, y, color);
+				singleSeat.Init(this, x, y, color);
 				singleSeat.transform.parent = parentContainer;
 				singleSeat.transform.localPosition = new Vector2(x, y);
 			}

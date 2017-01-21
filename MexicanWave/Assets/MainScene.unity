@@ -303,6 +303,8 @@ MonoBehaviour:
   singleSeatPrefab: {fileID: 1000011265415566, guid: bb8e10d21d1db4f24a43fa455a8b299f,
     type: 2}
   parentContainer: {fileID: 763057795}
+  humanJitterHorizontal: 0.4
+  humanJitterVertical: 0.2
 --- !u!4 &421245384
 Transform:
   m_ObjectHideFlags: 0
@@ -346,6 +348,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 421245384}
   m_RootOrder: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012486770480, guid: bb8e10d21d1db4f24a43fa455a8b299f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000014277231656, guid: bb8e10d21d1db4f24a43fa455a8b299f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000014277231656, guid: bb8e10d21d1db4f24a43fa455a8b299f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.1
 --- !u!1 &2044690025
 GameObject:
   m_ObjectHideFlags: 0

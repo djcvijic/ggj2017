@@ -3,27 +3,41 @@ using System.Collections;
 
 public class SingleSeat : MonoBehaviour
 {
+	public StandsView view;
 	public int x { get; private set; }
 	public int y { get; private set; }
 	public Sprite[] humanSprites;
 
 	public int playedId;
 
+	private Transform myHuman;
 	private SpriteRenderer myRenderer;
+	private Vector3 defaultPosition;
 	private float animationVal;
 	public float animationSpeed;
 
 	void Awake()
 	{
-		myRenderer = transform.Find("Human").GetComponent<SpriteRenderer>();
+		myHuman = transform.Find("Human");
+		myRenderer = myHuman.GetComponent<SpriteRenderer>();
 		humanSprites = Resources.LoadAll<Sprite>("Sprites/ljudi");
+		defaultPosition = new Vector3(0, -1.1f, 0);
 	}
 
-	public void Init(int x, int y, Color color)
+	public void Init(StandsView view, int x, int y, Color color)
 	{
+		this.view = view;
 		this.x = x;
 		this.y = y;
+
 		myRenderer.color = color;
+
+		myHuman.transform.localPosition = defaultPosition;
+		myHuman.transform.Translate(
+			(float)((Random.value - 0.5) * view.humanJitterHorizontal),
+			(float)((Random.value - 0.5) * view.humanJitterVertical),
+			0);
+
 		playedId = -1;
 	}
 
