@@ -23,7 +23,7 @@ public class SingleSeat : MonoBehaviour
 	void Update()
 	{
 		var val = StandsController.I.Value(x, y);
-		myRenderer.material.color = new Color(val, 0.5f, 0.5f, 0.5f);
+		myRenderer.material.color = new Color(val, 0.5f, 0.2f, 1f);
 	}
 
 }
