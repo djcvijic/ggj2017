@@ -90,7 +90,7 @@ public class WaveController : MonoBehaviour
 	{
 		Debug.Log("Wave ended");
 		allWaves.Remove(wave);
-		if (!wave.testWave && allWaves.Count == 0)
+		if (!wave.testWave && allWaves.Count == 0 && GameController.I.IsPlaying)
 		{
 			allWaves.AddRange(WaveGenerator.I.GetNextLevel());
 		}

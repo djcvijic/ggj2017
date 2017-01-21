@@ -85,7 +85,7 @@ public class Wave
 
 	private void CheckForEnd()
 	{
-		if (remainingBounces == 0)
+		if (remainingBounces == 0 || !GameController.I.IsPlaying)
 		{
 			WaveController.I.WaveEnded(this);
 		}
