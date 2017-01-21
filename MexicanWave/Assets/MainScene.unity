@@ -144,8 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb1807b3cb54406ab8fcc31245181a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultSpeed: 4
-  DefaultRange: 1
+  defaultSpeed: 12
+  defaultRange: 3
+  defaultBounces: 0
   positionMin: -7.8
   positionMax: 7.8
 --- !u!1 &353768661

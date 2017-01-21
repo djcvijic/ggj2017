@@ -22,8 +22,10 @@ public class WaveController : MonoBehaviour
 
 	private List<Wave> allWaves = new List<Wave>();
 
-	public float DefaultSpeed;
-	public float DefaultRange;
+	public float defaultSpeed;
+	public float defaultRange;
+	public float defaultBounces;
+	public bool defaultGoingRight = true;
 
 	public float positionMin;
 	public float positionMax;
@@ -35,7 +37,7 @@ public class WaveController : MonoBehaviour
 
 	public void AddSimpleWave()
 	{
-		var wave = new Wave(positionMin - DefaultRange, DefaultRange, DefaultSpeed);
+		var wave = new Wave(defaultRange, defaultSpeed, defaultBounces, defaultGoingRight);
 		allWaves.Add(wave);
 	}
 

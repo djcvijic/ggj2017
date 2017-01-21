@@ -7,26 +7,56 @@ public class Wave
 	public float centerPosition;
 	public float range;
 	public float speed;
+	public float remainingBounces;
 
 	public float LeftBorder { get { return centerPosition - range; } }
 	public float RightBorder { get { return centerPosition + range; } }
 
-	public Wave(float centerPosition, float range, float speed)
+	private bool goingRight;
+
+	public Wave(float range, float speed, float remainingBounces, bool initialRight = true)
 	{
-		this.centerPosition = centerPosition;
+		this.centerPosition = initialRight ? WaveController.I.positionMin - range : WaveController.I.positionMax + range;
 		this.range = range;
 		this.speed = speed;
+		this.remainingBounces = remainingBounces;
+		this.goingRight = initialRight;
 	}
 
 	public void UpdateWave()
 	{
-		centerPosition += speed * Time.deltaTime;
-		Debug.Log(centerPosition);
+		if (goingRight)
+		{
+			centerPosition += speed * Time.deltaTime;
 
-		// check for end
-		if (LeftBorder >= WaveController.I.positionMax)
+			// check for end
+			if (LeftBorder >= WaveController.I.positionMax)
+			{
+				CheckForEnd();
+			}
+		}
+		else
+		{
+			centerPosition -= speed * Time.deltaTime;
+
+			// check for end
+			if (RightBorder <= WaveController.I.positionMin)
+			{
+				CheckForEnd();
+			}
+		}
+	}
+
+	private void CheckForEnd()
+	{
+		if (remainingBounces == 0)
 		{
 			WaveController.I.WaveEnded(this);
+		}
+		else
+		{
+			remainingBounces--;
+			goingRight = !goingRight;
 		}
 	}
 
