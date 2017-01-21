@@ -23,8 +23,6 @@ public class GameController : MonoBehaviour
 	public RectTransform infoPanel;
 	public Text infoText;
 
-	private float timeToRestartGame;
-
 	public enum State
 	{
 		StartingGame,
@@ -58,9 +56,11 @@ public class GameController : MonoBehaviour
 
 	public void SwitchToEndGame(int winner)
 	{
-		timeToRestartGame = 3f;
 		CurrentState = State.EndGame;
-		infoText.text = (winner >= 0 ? ("Player " + (winner + 1) + " won!") : "Nobody won!" ) + " Press SPACE to restart.";
+		infoText.text = (winner >= 0
+			? ("Player " + (winner + 1) + " won!") 
+			: (winner == -1 ? "Nobody won!" : "Nice practice!")) 
+			+ " Press SPACE to restart.";
 		infoPanel.gameObject.SetActive(true);
 	}
 
@@ -75,8 +75,7 @@ public class GameController : MonoBehaviour
 		}
 		else if (CurrentState == State.EndGame)
 		{
-			timeToRestartGame -= Time.deltaTime;
-			if (timeToRestartGame <= 0f && Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetKeyDown(KeyCode.Space))
 			{
 				SwithToStartingGame();
 			}

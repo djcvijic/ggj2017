@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
 			seat.DeactivateAccessories();
 			player.awkwardness = 0f;
 			player.isDead = false;
+			player.isActive = false;
 		}
 
 		for (int i = 0; i < awkwardnessSliders.Count; i++)
@@ -96,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
 	public void CheckPlayers()
 	{
-		int alivePlayers = 0;
+		int alivePlayers = 0, activePlayers = 0;
 		for (int i = 0; i < Players.Count; i++)
 		{
 			var player = Players[i];
@@ -141,19 +142,20 @@ public class PlayerController : MonoBehaviour
 					}
 				}
 			}
-			if (!player.isDead) { alivePlayers++; }
+			if (!player.isDead && player.isActive) { alivePlayers++; }
+			if (player.isActive) { activePlayers++; }
 		}
 		// check for end game
 		if (GameController.I.IsPlaying)
 		{
-			if (alivePlayers == 1)
+			if (alivePlayers == 1 && activePlayers > 1)
 			{
 				var winner = Players.FindIndex(p => !p.isDead);
 				GameController.I.SwitchToEndGame(winner);
-			} else if (alivePlayers == 0)
+			}
+			else if (alivePlayers == 0)
 			{
-				// draw
-				GameController.I.SwitchToEndGame(-1);
+				GameController.I.SwitchToEndGame(activePlayers > 1 ? -1 : -2);
 			}
 		}
 	}
