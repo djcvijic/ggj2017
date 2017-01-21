@@ -300,11 +300,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1a546c1f40c41fdb11b2931544d089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeamColors:
+  - {r: 1, g: 0.56714, b: 0.28676468, a: 1}
+  - {r: 0.99264705, g: 0.3868404, b: 0.9759353, a: 1}
+  - {r: 0.14176036, g: 0.83823526, b: 0.6076781, a: 1}
+  - {r: 0.86683565, g: 1, b: 0.25735295, a: 1}
+  - {r: 0.2794118, g: 0.6720082, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
   singleSeatPrefab: {fileID: 1000011265415566, guid: bb8e10d21d1db4f24a43fa455a8b299f,
     type: 2}
   parentContainer: {fileID: 763057795}
-  humanJitterHorizontal: 0.4
-  humanJitterVertical: 0.2
+  humanJitterHorizontal: 0.3
+  humanJitterVertical: 0.1
 --- !u!4 &421245384
 Transform:
   m_ObjectHideFlags: 0

@@ -3,14 +3,7 @@ using System.Collections.Generic;
 
 public class StandsView : MonoBehaviour
 {
-	private static readonly Color[] TeamColors =
-	{
-		Color.gray,
-		Color.white,
-		Color.red,
-		Color.yellow,
-		Color.blue,
-	};
+	public List<Color> TeamColors;
 
 
 	#region Singleton
@@ -40,11 +33,11 @@ public class StandsView : MonoBehaviour
 
 	public void Reinitialize()
 	{
-		var firstColor = TeamColors[Mathf.FloorToInt(Random.value * TeamColors.Length)];
+		var firstColor = TeamColors[Mathf.FloorToInt(Random.value * TeamColors.Count)];
 		var secondColor = firstColor;
 		while (secondColor == firstColor)
 		{
-			secondColor = TeamColors[Mathf.FloorToInt(Random.value * TeamColors.Length)];
+			secondColor = TeamColors[Mathf.FloorToInt(Random.value * TeamColors.Count)];
 		}
 		Color[] colorCombo = { firstColor, secondColor };
 
