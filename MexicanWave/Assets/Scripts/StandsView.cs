@@ -3,7 +3,14 @@ using System.Collections.Generic;
 
 public class StandsView : MonoBehaviour
 {
-	public List<Color> TeamColors;
+	public List<ColorPick> TeamColors;
+
+	[System.Serializable]
+	public class ColorPick
+	{
+		public Color mainColor;
+		public List<Color> secondaryColors;
+	}
 
 
 	#region Singleton
@@ -39,7 +46,7 @@ public class StandsView : MonoBehaviour
 		{
 			secondColor = TeamColors[Mathf.FloorToInt(Random.value * TeamColors.Count)];
 		}
-		Color[] colorCombo = { firstColor, secondColor };
+		Color[] colorCombo = { firstColor.mainColor, secondColor.mainColor };
 
 		// remove existing seats
 		foreach(var seats in allSeats)

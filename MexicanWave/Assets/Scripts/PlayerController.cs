@@ -20,12 +20,15 @@ public class PlayerController : MonoBehaviour
 
 	#endregion
 
-	public List<HumanPlayer> players;
-	public List<HumanPlayer> activePlayers;
+	public List<HumanPlayer> Players { get; private set; }
+	public List<HumanPlayer> ActivePlayers { get; private set; }
+
+	public float maxAwkwardness = 1f;
+	public float awkwardnessIncrease;
 
 	void Awake()
 	{
-		players = new List<HumanPlayer>()
+		Players = new List<HumanPlayer>()
 		{
 			new HumanPlayer() { keyCode = KeyCode.A },
 			new HumanPlayer() { keyCode = KeyCode.L },
@@ -38,19 +41,22 @@ public class PlayerController : MonoBehaviour
 	{
 		var centerX = StandsController.I.width / 2;
 		var centerY = StandsController.I.height / 2;
-		activePlayers = players.GetRange(0, count);
-		activePlayers.ForEach(p => p.x = p.y = 0);
-		for (int i = 0; i < activePlayers.Count; i++)
+		ActivePlayers = Players.GetRange(0, count);
+		ActivePlayers.ForEach(p => p.x = p.y = 0);
+		for (int i = 0; i < ActivePlayers.Count; i++)
 		{
-			var player = activePlayers[i];
+			var player = ActivePlayers[i];
 			int x, y;
 			do
 			{
 				x = Random.Range(centerX - 4, centerX + 4);
 				y = Random.Range(centerY - 2, centerY + 2);
-			} while (activePlayers.Exists(p => p.x == x && p.y == y));
+			} while (ActivePlayers.Exists(p => p.x == x && p.y == y));
 			player.x = x;
 			player.y = y;
+			player.isStanding = false;
+			player.awkwardness = 0f;
+			player.isDead = false;
 			StandsView.I.At(x, y).playedId = i;
 			Debug.Log("NEW PLAYER " + x + " " + y);
 		}
@@ -58,14 +64,17 @@ public class PlayerController : MonoBehaviour
 
 	public float StandingValue(int id)
 	{
-		return activePlayers[id].isStanding ? 1f : 0f;
+		return ActivePlayers[id].isStanding ? 1f : 0f;
 	}
 
 	public void CheckPlayers()
 	{
-		for (int i = 0; i < activePlayers.Count; i++)
+		for (int i = 0; i < ActivePlayers.Count; i++)
 		{
-			var player = activePlayers[i];
+			var player = ActivePlayers[i];
+			if (player.isDead)
+				continue;
+			
 			if (Input.GetKeyDown(player.keyCode))
 			{
 				player.isStanding = !player.isStanding;
@@ -75,7 +84,13 @@ public class PlayerController : MonoBehaviour
 			var val = StandsController.I.Seats[player.x, player.y];
 			if ((val <= 0.1f && player.isStanding) || (val >= 0.9f && !player.isStanding))
 			{
-				Debug.Log(player.isStanding ? "STANDING!" : "SITTING!");
+				player.awkwardness += awkwardnessIncrease;
+				Debug.Log(player.awkwardness + "  " + (player.isStanding ? "STANDING!" : "SITTING!"));
+				if (player.awkwardness >= maxAwkwardness)
+				{
+					player.isDead = true;
+					Debug.Log("DEAD");
+				}
 			}
 		}
 	}

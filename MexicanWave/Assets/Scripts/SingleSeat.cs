@@ -39,6 +39,7 @@ public class SingleSeat : MonoBehaviour
 			0);
 
 		playedId = -1;
+		myRenderer.enabled = true; 
 	}
 
 	void Update()
@@ -55,6 +56,10 @@ public class SingleSeat : MonoBehaviour
 		if (index >= humanSprites.Length) index = humanSprites.Length - 1;
 		//Debug.Log(index);
 		myRenderer.sprite = humanSprites[index];
+		if (playedId > -1)
+		{
+			myRenderer.enabled = !PlayerController.I.ActivePlayers [playedId].isDead;
+		} 
 	}
 
 }
