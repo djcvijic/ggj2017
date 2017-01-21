@@ -183,12 +183,11 @@ public class PlayerController : MonoBehaviour
 		{
 			if (alivePlayers == 1 && activePlayers > 1)
 			{
-				var winner = Players.FindIndex(p => !p.isDead);
-				GameController.I.SwitchToEndGame(winner);
+				GameController.I.SwitchToEndGame(Players.Find(p => !p.isDead));
 			}
 			else if (alivePlayers == 0)
 			{
-				GameController.I.SwitchToEndGame(activePlayers > 1 ? -1 : -2);
+				GameController.I.SwitchToEndGame(activePlayers == 1 ? Players.Find(p => p.isActive) : null);
 			}
 			return;
 		}

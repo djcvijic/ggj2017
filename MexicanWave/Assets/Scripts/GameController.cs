@@ -57,12 +57,12 @@ public class GameController : MonoBehaviour
 		WaveController.I.StartFirstWave();
 	}
 
-	public void SwitchToEndGame(int winner)
+	public void SwitchToEndGame(HumanPlayer winner)
 	{
 		CurrentState = State.EndGame;
-		infoText.text = (winner >= 0
-			? ("Player " + (winner + 1) + " won!") 
-			: (winner == -1 ? "Nobody won!" : "Nice practice!")) 
+		infoText.text = ((winner != null && !winner.isDead)
+			? ("Player " + winner.keyCode + " won!") 
+			: (winner == null ? "Nobody won!" : "Nice practice!")) 
 			+ " Press SPACE to restart.";
 		infoPanel.gameObject.SetActive(true);
 	}
