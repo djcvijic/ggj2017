@@ -9,4 +9,9 @@ public static class Util
 		return (Random.value > 0.5f ? -1 : 1) * offset * Random.value;
 	}
 
+	public static bool Approximately(this float val, float other)
+	{
+		return Mathf.Abs(val - other) < 0.01f;
+	}
+
 }
