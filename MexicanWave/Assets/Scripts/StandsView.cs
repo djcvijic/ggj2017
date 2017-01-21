@@ -40,13 +40,14 @@ public class StandsView : MonoBehaviour
 
 	public void Reinitialize()
 	{
-		var firstColor = TeamColors[Mathf.FloorToInt(Random.value * TeamColors.Count)];
-		var secondColor = firstColor;
-		while (secondColor == firstColor)
+		var firstId = Mathf.FloorToInt(Random.value * TeamColors.Count);
+		var first = TeamColors[firstId];
+		var secondColor = first.mainColor;
+		while (secondColor == first.mainColor)
 		{
-			secondColor = TeamColors[Mathf.FloorToInt(Random.value * TeamColors.Count)];
+			secondColor = TeamColors[firstId].secondaryColors[Mathf.FloorToInt(Random.value * TeamColors[firstId].secondaryColors.Count)];
 		}
-		Color[] colorCombo = { firstColor.mainColor, secondColor.mainColor };
+		Color[] colorCombo = { first.mainColor, secondColor };
 
 		// remove existing seats
 		foreach(var seats in allSeats)
