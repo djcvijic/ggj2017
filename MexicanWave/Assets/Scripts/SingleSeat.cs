@@ -6,7 +6,6 @@ public class SingleSeat : MonoBehaviour
 
 	public int x { get; private set; }
 	public int y { get; private set; }
-	public StandsView view { get; private set; }
 
 	private Renderer myRenderer;
 
@@ -15,11 +14,10 @@ public class SingleSeat : MonoBehaviour
 		myRenderer = GetComponentInChildren<Renderer>();
 	}
 
-	public void Init(int x, int y, StandsView view)
+	public void Init(int x, int y)
 	{
 		this.x = x;
 		this.y = y;
-		this.view = view;
 	}
 
 	void Update()

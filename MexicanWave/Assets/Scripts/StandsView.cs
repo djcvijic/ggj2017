@@ -51,7 +51,7 @@ public class StandsView : MonoBehaviour
 					allSeats.Add(singleSeat);
 				}
 
-				singleSeat.Init(i, j, this);
+				singleSeat.Init(i, j);
 				singleSeat.transform.parent = parentContainer;
 				singleSeat.transform.localPosition = new Vector2(i, j);
 			}
