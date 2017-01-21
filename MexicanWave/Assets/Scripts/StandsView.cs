@@ -36,18 +36,21 @@ public class StandsView : MonoBehaviour
 	public float humanJitterHorizontal;
 	public float humanJitterVertical;
 
+	public float accessoryProbability;
+	public float accessorySittingOffset;
+
 	private List<SingleSeat> allSeats = new List<SingleSeat>();
 
 	public void Reinitialize()
 	{
 		var firstId = Mathf.FloorToInt(Random.value * TeamColors.Count);
 		var first = TeamColors[firstId];
-		var secondColor = first.mainColor;
-		while (secondColor == first.mainColor)
+		var firstColor = first.mainColor;
+		var secondColor = firstColor;
+		while (secondColor == firstColor)
 		{
 			secondColor = TeamColors[firstId].secondaryColors[Mathf.FloorToInt(Random.value * TeamColors[firstId].secondaryColors.Count)];
 		}
-		Color[] colorCombo = { first.mainColor, secondColor };
 
 		// remove existing seats
 		foreach(var seats in allSeats)
@@ -72,9 +75,9 @@ public class StandsView : MonoBehaviour
 				}
 
 				var randomBlend = Random.value;
-				var color = colorCombo[0] * randomBlend + colorCombo[1] * (1 - randomBlend);
+				var color = firstColor * randomBlend + secondColor * (1 - randomBlend);
 
-				singleSeat.Init(this, x, y, color);
+				singleSeat.Init(this, x, y, color, firstColor);
 				singleSeat.transform.parent = parentContainer;
 				singleSeat.transform.localPosition = new Vector2(x, y);
 			}

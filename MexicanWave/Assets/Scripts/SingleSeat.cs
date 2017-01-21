@@ -6,25 +6,29 @@ public class SingleSeat : MonoBehaviour
 	public StandsView view;
 	public int x { get; private set; }
 	public int y { get; private set; }
+
+	public Transform myHuman;
 	public Sprite[] humanSprites;
 
 	public int playedId;
 
-	private Transform myHuman;
 	private SpriteRenderer myRenderer;
-	private Vector3 defaultPosition;
+	private Vector3 initialHumanPosition;
 	private float animationVal;
 	public float animationSpeed;
 
+	public GameObject[] accessories;
+	private Transform myAccessory;
+	private Vector3 initialAccessoryPosition;
+
 	void Awake()
 	{
-		myHuman = transform.Find("Human");
 		myRenderer = myHuman.GetComponent<SpriteRenderer>();
 		humanSprites = Resources.LoadAll<Sprite>("Sprites/ljudi");
-		defaultPosition = new Vector3(0, -1.1f, 0);
+		initialHumanPosition = myHuman.transform.localPosition;
 	}
 
-	public void Init(StandsView view, int x, int y, Color color)
+	public void Init(StandsView view, int x, int y, Color color, Color accessoryColor)
 	{
 		this.view = view;
 		this.x = x;
@@ -32,14 +36,24 @@ public class SingleSeat : MonoBehaviour
 
 		myRenderer.color = color;
 
-		myHuman.transform.localPosition = defaultPosition;
+		myHuman.transform.localPosition = initialHumanPosition;
 		myHuman.transform.Translate(
 			(float)((Random.value - 0.5) * view.humanJitterHorizontal),
 			(float)((Random.value - 0.5) * view.humanJitterVertical),
 			0);
 
 		playedId = -1;
-		myRenderer.enabled = true; 
+		myRenderer.enabled = true;
+
+		DeactivateAccessories();
+		if (Random.value < view.accessoryProbability)
+		{
+			var randomAccessory = accessories[Mathf.FloorToInt(Random.value * accessories.Length)];
+			randomAccessory.SetActive(true);
+			myAccessory = randomAccessory.transform;
+			initialAccessoryPosition = myAccessory.localPosition;
+			randomAccessory.GetComponent<SpriteRenderer>().color = accessoryColor;
+		}
 	}
 
 	public void InvertColor()
@@ -56,6 +70,14 @@ public class SingleSeat : MonoBehaviour
 		myRenderer.color = inverseColor;
 
 
+	}
+
+	public void DeactivateAccessories()
+	{
+		foreach (GameObject accessory in accessories)
+		{
+			accessory.SetActive(false);
+		}
 	}
 
 	void Update()
@@ -75,7 +97,14 @@ public class SingleSeat : MonoBehaviour
 		if (playedId > -1)
 		{
 			myRenderer.enabled = !PlayerController.I.ActivePlayers [playedId].isDead;
-		} 
+		}
+
+		if (myAccessory != null)
+		{
+			var accessoryPositionQuotient = 1 - ((float)(1 + index) / humanSprites.Length);
+			var accessoryPositionOffset = accessoryPositionQuotient * new Vector3(0, view.accessorySittingOffset, 0);
+			myAccessory.localPosition = initialAccessoryPosition + accessoryPositionOffset;
+		}
 	}
 
 }

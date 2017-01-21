@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
 			var seat = StandsView.I.At(x, y);
 			seat.playedId = i;
 			seat.InvertColor();
+			seat.DeactivateAccessories();
 			player.isStanding = false;
 			player.awkwardness = 0f;
 			player.isDead = false;
