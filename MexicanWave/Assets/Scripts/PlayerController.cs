@@ -51,7 +51,9 @@ public class PlayerController : MonoBehaviour
 			} while (activePlayers.Exists(p => p.x == x && p.y == y));
 			player.x = x;
 			player.y = y;
-			StandsView.I.At(x, y).playedId = i;
+			var seat = StandsView.I.At(x, y);
+			seat.playedId = i;
+			seat.InvertColor();
 			Debug.Log("NEW PLAYER " + x + " " + y);
 		}
 	}
