@@ -25,6 +25,8 @@ public class StandsController : MonoBehaviour
 
 	public float[,] Seats { get; private set; }
 
+	public float[,] RandomOffset { get; private set; }
+
 	public void Start()
 	{
 		StartNewGame();
@@ -36,12 +38,24 @@ public class StandsController : MonoBehaviour
 		for (int i = 0; i < width; i++)
 		{
 			var columnValue = WaveController.I.CalculateInfluence(i);
-			for (int j = 0; j < height; j++) { Seats [i, j] = columnValue; }
+			for (int j = 0; j < height; j++)
+			{
+				if (columnValue > 0 && RandomOffset [i, j] == 0f)
+				{
+					RandomOffset[i, j] = Random.value * WaveController.I.defaultOffset;
+				}
+				else if (columnValue == 0 && RandomOffset [i, j] != 0f)
+				{
+					RandomOffset[i, j] = 0f;
+				}
+				Seats[i, j] = columnValue + RandomOffset[i, j];
+			}
 		}
 	}
 
 	public void StartNewGame(int w, int h)
 	{
+		RandomOffset = new float[w,h];
 		Seats = new float[w,h];
 		for (int i = 0; i < w; i++)
 		{

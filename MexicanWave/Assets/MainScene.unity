@@ -144,12 +144,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb1807b3cb54406ab8fcc31245181a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSpeed: 12
+  defaultSpeed: 8
   defaultRange: 3
   defaultBounces: 0
   defaultGoingRight: 1
   positionMin: -7.8
   positionMax: 7.8
+  defaultOffset: 0.4
 --- !u!1 &353768661
 GameObject:
   m_ObjectHideFlags: 0

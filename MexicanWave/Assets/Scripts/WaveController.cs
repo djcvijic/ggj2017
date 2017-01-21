@@ -30,6 +30,8 @@ public class WaveController : MonoBehaviour
 	public float positionMin;
 	public float positionMax;
 
+	public float defaultOffset;
+
 	public void ClearWaves()
 	{
 		allWaves.Clear();
