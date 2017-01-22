@@ -55,6 +55,10 @@ public class SingleSeat : MonoBehaviour
 			randomAccessory.SetActive(true);
 			myAccessory = randomAccessory.transform;
 			initialAccessoryPosition = myAccessory.localPosition;
+			if (myAccessory.Equals(accessories[0].transform) && !initialAccessoryPosition.y.Equals(2.85f))
+			{
+				Debug.Log("inital position in init is " + initialAccessoryPosition.y);
+			}
 			randomAccessory.GetComponent<SpriteRenderer>().color = accessoryColor;
 		}
 
@@ -94,6 +98,15 @@ public class SingleSeat : MonoBehaviour
 		}
 	}
 
+	public void Reinitialize()
+	{
+		seat.gameObject.SetActive(false);
+		if (myAccessory != null)
+		{
+			myAccessory.localPosition = initialAccessoryPosition;
+		}
+	}
+
 	void Update()
 	{
 		var val = playedId != -1 ? PlayerController.I.StandingValue(playedId) : StandsController.I.Value(x, y);
@@ -117,6 +130,10 @@ public class SingleSeat : MonoBehaviour
 		{
 			var accessoryPositionQuotient = 1 - ((float)(1 + index) / humanSprites.Length);
 			var accessoryPositionOffset = accessoryPositionQuotient * new Vector3(0, view.accessorySittingOffset, 0);
+			if (myAccessory.Equals(accessories[0].transform) && !initialAccessoryPosition.y.Equals(2.85f))
+			{
+				Debug.Log("initial position in update is " + initialAccessoryPosition.y);
+			}
 			myAccessory.localPosition = initialAccessoryPosition + accessoryPositionOffset;
 		}
 	}

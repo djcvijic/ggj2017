@@ -53,8 +53,8 @@ public class StandsView : MonoBehaviour
 		}
 
 		// remove existing seats
-		foreach(var seats in allSeats)
-			seats.gameObject.SetActive(false);
+		foreach (var seat in allSeats)
+			seat.Reinitialize();
 		
 		// create new ones
 		for (int y = 0; y < StandsController.I.height; y++)
