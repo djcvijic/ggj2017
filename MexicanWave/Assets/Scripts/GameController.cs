@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour
 
 	public void SwitchToLogo()
 	{
-		FindObjectOfType<AudioSource>().PlayDelayed(0.4f);
+		GetComponent<AudioSource>().PlayDelayed(0.4f);
 		CurrentState = State.Logo;
 		Go.to(logoPanel, 2f, new GoTweenConfig()
 			.floatProp("alpha", 1f)
