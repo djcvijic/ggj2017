@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17eb1cafe0394d68b7b00fb9d2bc576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infoPanel: {fileID: 1856219656}
+  infoPanel: {fileID: 1856219659}
   infoText: {fileID: 593254744}
 --- !u!114 &151561800
 MonoBehaviour:
@@ -442,7 +442,7 @@ MonoBehaviour:
       remainingBounces: 2
       goingRight: 1
       goingRandom: 1
-      timeToStart: 1
+      timeToStart: 1.5
   - level: 1
     waves:
     - range: 3
@@ -1671,6 +1671,7 @@ GameObject:
   - 224: {fileID: 1856219656}
   - 222: {fileID: 1856219658}
   - 114: {fileID: 1856219657}
+  - 225: {fileID: 1856219659}
   m_Layer: 5
   m_Name: infoPanel
   m_TagString: Untagged
@@ -1730,6 +1731,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1856219655}
+--- !u!225 &1856219659
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1856219655}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &1905464378 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000011542232624, guid: 30d604777e72a481da64219cd459a82b,

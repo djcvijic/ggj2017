@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
 
 	#endregion
 
-	public RectTransform infoPanel;
+	public CanvasGroup infoPanel;
 	public Text infoText;
 
 	public enum State
@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
 
 	void Start()
 	{
+		infoPanel.alpha = 1f;
 		SwithToStartingGame();
 	}
 
@@ -44,7 +45,7 @@ public class GameController : MonoBehaviour
 	{
 		CurrentState = State.StartingGame;
 		infoText.text = "Activate players, press SPACE/START when ready";
-		infoPanel.gameObject.SetActive(true);
+		Go.to(infoPanel, 0.4f, new GoTweenConfig().floatProp("alpha", 1f));
 		StandsController.I.StartNewGame();
 		WaveGenerator.I.Reset();
 	}
@@ -52,7 +53,7 @@ public class GameController : MonoBehaviour
 	public void SwitchToPlaying()
 	{
 		CurrentState = State.Playing;
-		infoPanel.gameObject.SetActive(false);
+		Go.to(infoPanel, 0.4f, new GoTweenConfig().floatProp("alpha", 0f));
 		PlayerController.I.PrepareForStart();
 		WaveController.I.StartFirstWave();
 	}
@@ -64,7 +65,7 @@ public class GameController : MonoBehaviour
 			? ("Player " + winner.keyCode + " won!") 
 			: (winner == null ? "Nobody won!" : "Nice practice!")) 
 			+ " Press SPACE/START to restart.";
-		infoPanel.gameObject.SetActive(true);
+		Go.to(infoPanel, 0.4f, new GoTweenConfig().floatProp("alpha", 1f));
 	}
 
 	void Update()
@@ -81,6 +82,7 @@ public class GameController : MonoBehaviour
 		{
 			if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton9))
 			{
+				infoPanel.alpha = 0f;
 				SwithToStartingGame();
 			}
 		}
