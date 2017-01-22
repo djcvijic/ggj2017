@@ -97,6 +97,9 @@ public class GameController : MonoBehaviour
 		SwithToStartingGame();
 		Go.to(introPanel, 0.4f, new GoTweenConfig().floatProp("alpha", 0f));
 		Go.to(introBackground, 0.4f, new GoTweenConfig().floatProp("alpha", 0f));
+		Go.to(firstIntroPanel, 0.4f, new GoTweenConfig().floatProp("alpha", 0f));
+		Go.to(secondIntroPanel, 0.4f, new GoTweenConfig().floatProp("alpha", 0f));
+		Go.to(pressAnyKeyIntro, 0.4f, new GoTweenConfig().floatProp("alpha", 0f));
 	}
 
 	public void SwithToStartingGame()
