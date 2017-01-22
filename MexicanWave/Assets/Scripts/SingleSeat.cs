@@ -40,14 +40,14 @@ public class SingleSeat : MonoBehaviour
 	public void PlayYeah()
 	{
 		audio.Stop();
-		audio.clip = yeahSounds[Random.Range(0, yeahSounds.Count - 1)];
+		audio.clip = yeahSounds[Random.Range(0, yeahSounds.Count)];
 		audio.Play();
 	}
 
 	public void PlaySitDown()
 	{
 		audio.Stop();
-		audio.clip = sitDownSounds[Random.Range(0, sitDownSounds.Count - 1)];
+		audio.clip = sitDownSounds[Random.Range(0, sitDownSounds.Count)];
 		audio.Play();
 	}
 
