@@ -74,8 +74,8 @@ public class GameController : MonoBehaviour
 		CurrentState = State.Intro;
 		Go.to(introPanel, 1.5f, new GoTweenConfig().floatProp("alpha", 1f));
 		Go.to(firstIntroPanel, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(0.1f));
-		Go.to(secondIntroPanel, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(7.5f));
-		Go.to(pressAnyKeyIntro, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(12f));
+		Go.to(secondIntroPanel, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(6.5f));
+		Go.to(pressAnyKeyIntro, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(11f));
 	}
 
 	public void EndIntro()
