@@ -100,7 +100,7 @@ public class SingleSeat : MonoBehaviour
 
 	public void Reinitialize()
 	{
-		seat.gameObject.SetActive(false);
+		gameObject.SetActive(false);
 		if (myAccessory != null)
 		{
 			myAccessory.localPosition = initialAccessoryPosition;
