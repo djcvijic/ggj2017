@@ -58,15 +58,15 @@ public class GameController : MonoBehaviour
 
 	public void SwitchToLogo()
 	{
-		FindObjectOfType<AudioSource>().PlayDelayed(0.5f);
+		FindObjectOfType<AudioSource>().PlayDelayed(0.4f);
 		CurrentState = State.Logo;
 		Go.to(logoPanel, 2f, new GoTweenConfig()
 			.floatProp("alpha", 1f)
-			.setDelay(0.5f)
+			.setDelay(0.4f)
 			.onComplete(
 				t => Go.to(logoPanel, 1f, new GoTweenConfig()
 					.floatProp("alpha", 0f)
-					.setDelay(1.5f)
+					.setDelay(1.3f)
 					.onComplete(t2 => SwitchToIntro())
 				)
 			)

@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
 			{
 				x = Random.Range(centerX - 4, centerX + 4);
 				y = Random.Range(centerY - 2, centerY + 2);
-			} while (Players.Exists(p => p.isActive && p.x == x && p.y == y));
+			} while (Players.Exists(p => p.x == x && p.y == y));
 			player.x = x;
 			player.y = y;
 			var seat = StandsView.I.At(x, y);
