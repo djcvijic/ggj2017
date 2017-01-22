@@ -80,9 +80,11 @@ public class GameController : MonoBehaviour
 		introAnimations.Add(
 			Go.to(firstIntroPanel, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(0.1f))
 		);
+		firstIntroPanel.GetComponent<AudioSource>().PlayDelayed(0.3f);
 		introAnimations.Add(
 			Go.to(secondIntroPanel, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(6f))
 		);
+		secondIntroPanel.GetComponent<AudioSource>().PlayDelayed(6.3f);
 		introAnimations.Add(
 			Go.to(pressAnyKeyIntro, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(12f))
 		);
@@ -122,6 +124,7 @@ public class GameController : MonoBehaviour
 
 	public void SwitchToEndGame(HumanPlayer winner)
 	{
+		GetComponent<AudioSource>().Play();
 		CurrentState = State.EndGame;
 		infoText.text = ((winner != null && !winner.isDead)
 			? ("Player " + winner.keyCode + " won!") 
