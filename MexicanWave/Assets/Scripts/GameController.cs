@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour
 	public void SwithToStartingGame()
 	{
 		CurrentState = State.StartingGame;
-		infoText.text = "Activate players, press SPACE when ready";
+		infoText.text = "Activate players, press SPACE/START when ready";
 		infoPanel.gameObject.SetActive(true);
 		StandsController.I.StartNewGame();
 		WaveGenerator.I.Reset();
@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour
 		infoText.text = ((winner != null && !winner.isDead)
 			? ("Player " + winner.keyCode + " won!") 
 			: (winner == null ? "Nobody won!" : "Nice practice!")) 
-			+ " Press SPACE to restart.";
+			+ " Press SPACE/START to restart.";
 		infoPanel.gameObject.SetActive(true);
 	}
 
@@ -71,14 +71,15 @@ public class GameController : MonoBehaviour
 	{
 		if (CurrentState == State.StartingGame)
 		{
-			if (Input.GetKeyDown(KeyCode.Space) && PlayerController.I.Players.Exists(p => p.isActive))
+			if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton9))
+				&& PlayerController.I.Players.Exists(p => p.isActive))
 			{
 				SwitchToPlaying();
 			}
 		}
 		else if (CurrentState == State.EndGame)
 		{
-			if (Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton9))
 			{
 				SwithToStartingGame();
 			}

@@ -91,6 +91,19 @@ public class PlayerController : MonoBehaviour
 		return Players[id].isStanding ? 1f : 0f;
 	}
 
+	private bool IsJoystickStartButton(KeyCode kcode)
+	{
+		return kcode == KeyCode.JoystickButton9
+			|| kcode == KeyCode.Joystick1Button9
+			|| kcode == KeyCode.Joystick2Button9
+			|| kcode == KeyCode.Joystick3Button9
+			|| kcode == KeyCode.Joystick4Button9
+			|| kcode == KeyCode.Joystick5Button9
+			|| kcode == KeyCode.Joystick6Button9
+			|| kcode == KeyCode.Joystick7Button9
+			|| kcode == KeyCode.Joystick8Button9;
+	}
+
 	public void CheckPlayers()
 	{
 		// activate new players
@@ -98,7 +111,7 @@ public class PlayerController : MonoBehaviour
 		{
 			foreach(KeyCode kcode in System.Enum.GetValues(typeof(KeyCode)))
 			{
-				if (kcode == KeyCode.Escape || kcode == KeyCode.Space 
+				if (kcode == KeyCode.Escape || kcode == KeyCode.Space || IsJoystickStartButton(kcode)
 					|| (kcode >= KeyCode.JoystickButton0 && kcode <= KeyCode.JoystickButton19))
 					continue;
 				if (Input.GetKeyDown(kcode) && !Players.Exists(p => p.isActive && p.keyCode == kcode))
