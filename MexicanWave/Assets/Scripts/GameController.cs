@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
@@ -43,6 +44,8 @@ public class GameController : MonoBehaviour
 	public bool IsPlaying { get { return CurrentState == State.Playing; } }
 	public bool IsStarting { get { return CurrentState == State.StartingGame; } }
 
+	private List<GoTween> introAnimations = new List<GoTween>();
+
 	void Start()
 	{
 		introBackground.alpha = 1f;
@@ -73,18 +76,27 @@ public class GameController : MonoBehaviour
 	{
 		CurrentState = State.Intro;
 		Go.to(introPanel, 1.5f, new GoTweenConfig().floatProp("alpha", 1f));
-		Go.to(firstIntroPanel, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(0.1f));
-		Go.to(secondIntroPanel, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(6.5f));
-		Go.to(pressAnyKeyIntro, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(11f));
+		introAnimations.Add(
+			Go.to(firstIntroPanel, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(0.1f))
+		);
+		introAnimations.Add(
+			Go.to(secondIntroPanel, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(6f))
+		);
+		introAnimations.Add(
+			Go.to(pressAnyKeyIntro, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(12f))
+		);
 	}
 
 	public void EndIntro()
 	{
+		foreach (var anim in introAnimations)
+		{
+			anim.complete();
+			anim.destroy();
+		}
 		SwithToStartingGame();
-		Go.to(introPanel, 1f, new GoTweenConfig()
-			.floatProp("alpha", 0f)
-		);
-		Go.to(introBackground, 1f, new GoTweenConfig().floatProp("alpha", 0f));
+		Go.to(introPanel, 0.4f, new GoTweenConfig().floatProp("alpha", 0f));
+		Go.to(introBackground, 0.4f, new GoTweenConfig().floatProp("alpha", 0f));
 	}
 
 	public void SwithToStartingGame()

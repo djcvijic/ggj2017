@@ -207,8 +207,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 48
+    m_Font: {fileID: 12800000, guid: 879a6881315424aec8eaddeff2eb14e9, type: 3}
+    m_FontSize: 64
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -220,9 +220,9 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: '... Except as you walk into the stadium, you''re directed to the south
-    stands, and immediately start to panic, since you''ll be seated with <b><i>Violence
-    United</i></b> fans. Ok, don''t panic, just play it cool and try to fit in as
-    best you can, and you might survive the day.'
+    stands, and immediately start to panic, since you''ll be seated with <b><color=red>Violence
+    United</color></b> fans. Ok, don''t panic, just play it cool and try to fit in
+    as best you can, and you might survive the day.'
 --- !u!222 &55195024
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -284,12 +284,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 80
+    m_Font: {fileID: 12800000, guid: 879a6881315424aec8eaddeff2eb14e9, type: 3}
+    m_FontSize: 120
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 120
+    m_MaxSize: 136
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -413,12 +413,12 @@ Prefab:
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.475
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30d604777e72a481da64219cd459a82b, type: 2}
@@ -914,8 +914,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
-  m_SizeDelta: {x: 1920, y: 101}
+  m_AnchoredPosition: {x: -0.000061035156, y: -6}
+  m_SizeDelta: {x: 1920, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &593254744
 MonoBehaviour:
@@ -937,12 +937,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
+    m_Font: {fileID: 12800000, guid: 879a6881315424aec8eaddeff2eb14e9, type: 3}
+    m_FontSize: 119
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 100
+    m_MaxSize: 119
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1051,8 +1051,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 80
+    m_Font: {fileID: 12800000, guid: 879a6881315424aec8eaddeff2eb14e9, type: 3}
+    m_FontSize: 120
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1186,12 +1186,12 @@ Prefab:
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.475
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30d604777e72a481da64219cd459a82b, type: 2}
@@ -1313,12 +1313,12 @@ Prefab:
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.475
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30d604777e72a481da64219cd459a82b, type: 2}
@@ -1588,8 +1588,8 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -332, y: 261}
-  m_SizeDelta: {x: 1164, y: 522}
+  m_AnchoredPosition: {x: -249, y: 261}
+  m_SizeDelta: {x: 1330, y: 522}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201080979
 MonoBehaviour:
@@ -1611,8 +1611,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 48
+    m_Font: {fileID: 12800000, guid: 879a6881315424aec8eaddeff2eb14e9, type: 3}
+    m_FontSize: 64
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1623,11 +1623,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This is it, the derby of the year, and <b><i>Awkward FC</i></b> is playing
-    at home! You called in sick at work today, got through two hours of traffic, almost
-    didn't make it in time, but you're finally at the stadium. Being the git you are,
-    you even forgot your ticket at home, but you managed to get one at the last moment
-    from a peddler at the entrance - what luck!
+  m_Text: This is it, the derby of the year, and <b><color=#0f0>Awkward FC</color></b>
+    is playing at home! You called in sick at work today, got through two hours of
+    traffic, almost didn't make it in time, but you're finally at the stadium. Being
+    the git you are, you even forgot your ticket at home, but you managed to get one
+    at the last moment from a peddler at the entrance - what luck!
 --- !u!222 &1201080980
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1734,7 +1734,7 @@ Prefab:
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000012277572058, guid: 30d604777e72a481da64219cd459a82b, type: 2}
       propertyPath: m_Name
@@ -1743,7 +1743,7 @@ Prefab:
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.475
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30d604777e72a481da64219cd459a82b, type: 2}
@@ -1934,7 +1934,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.025024414, y: 0}
+  m_AnchoredPosition: {x: 0.125, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1351184106
@@ -2211,12 +2211,12 @@ Prefab:
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.475
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30d604777e72a481da64219cd459a82b, type: 2}
@@ -2400,7 +2400,7 @@ Prefab:
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000012277572058, guid: 30d604777e72a481da64219cd459a82b, type: 2}
       propertyPath: m_Name
@@ -2409,7 +2409,7 @@ Prefab:
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.475
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30d604777e72a481da64219cd459a82b, type: 2}
@@ -2529,12 +2529,12 @@ Prefab:
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.475
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30d604777e72a481da64219cd459a82b, type: 2}
@@ -2582,8 +2582,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -254}
-  m_SizeDelta: {x: 1920, y: 158}
+  m_AnchoredPosition: {x: 0, y: -262}
+  m_SizeDelta: {x: 1920, y: 217}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1680880931
 MonoBehaviour:
@@ -2605,12 +2605,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 120
+    m_Font: {fileID: 12800000, guid: 879a6881315424aec8eaddeff2eb14e9, type: 3}
+    m_FontSize: 177
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 120
+    m_MaxSize: 206
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2747,8 +2747,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 64
+    m_Font: {fileID: 12800000, guid: 879a6881315424aec8eaddeff2eb14e9, type: 3}
+    m_FontSize: 102
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -2799,8 +2799,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.125, y: -469}
-  m_SizeDelta: {x: 1920, y: 107}
+  m_AnchoredPosition: {x: 0.125, y: -472}
+  m_SizeDelta: {x: 1920, y: 101}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1827778716
 MonoBehaviour:
@@ -2822,8 +2822,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 64
+    m_Font: {fileID: 12800000, guid: 879a6881315424aec8eaddeff2eb14e9, type: 3}
+    m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -3170,7 +3170,7 @@ Prefab:
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000012277572058, guid: 30d604777e72a481da64219cd459a82b, type: 2}
       propertyPath: m_Name
@@ -3179,7 +3179,7 @@ Prefab:
     - target: {fileID: 224000010661753508, guid: 30d604777e72a481da64219cd459a82b,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.475
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30d604777e72a481da64219cd459a82b, type: 2}

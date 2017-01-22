@@ -88,7 +88,6 @@ public class WaveController : MonoBehaviour
 
 	public void WaveEnded(Wave wave)
 	{
-		Debug.Log("Wave ended");
 		allWaves.Remove(wave);
 		if (!wave.testWave && allWaves.Count == 0 && GameController.I.IsPlaying)
 		{
