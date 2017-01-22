@@ -29,6 +29,8 @@ public class StandsController : MonoBehaviour
 
 	void Update()
 	{
+		if (!GameController.I.IsFinishedIntro)
+			return;
 		// update stands depending on waves
 		for (int i = 0; i < width; i++)
 		{

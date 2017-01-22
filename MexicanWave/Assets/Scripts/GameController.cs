@@ -22,24 +22,70 @@ public class GameController : MonoBehaviour
 
 	public CanvasGroup infoPanel;
 	public Text infoText;
+	public CanvasGroup introBackground;
+	public CanvasGroup logoPanel;
+	public CanvasGroup introPanel;
+	public CanvasGroup firstIntroPanel;
+	public CanvasGroup secondIntroPanel;
+	public CanvasGroup pressAnyKeyIntro;
 
 	public enum State
 	{
+		Logo,
+		Intro,
 		StartingGame,
 		Playing,
 		EndGame
 	}
 
 	public State CurrentState { get; private set; }
+	public bool IsFinishedIntro { get { return CurrentState > State.Intro; } }
 	public bool IsPlaying { get { return CurrentState == State.Playing; } }
 	public bool IsStarting { get { return CurrentState == State.StartingGame; } }
 
 	void Start()
 	{
+		introBackground.alpha = 1f;
+		logoPanel.alpha = 0f;
+		introPanel.alpha = 0f;
 		infoPanel.alpha = 1f;
-		SwithToStartingGame();
+		firstIntroPanel.alpha = secondIntroPanel.alpha = pressAnyKeyIntro.alpha = 0f;
+		SwitchToLogo();
 	}
 
+	public void SwitchToLogo()
+	{
+		CurrentState = State.Logo;
+		Go.to(logoPanel, 2.5f, new GoTweenConfig()
+			.floatProp("alpha", 1f)
+			.setDelay(0.5f)
+			.onComplete(
+				t => Go.to(logoPanel, 1f, new GoTweenConfig()
+					.floatProp("alpha", 0f)
+					.setDelay(1.5f)
+					.onComplete(t2 => SwitchToIntro())
+				)
+			)
+		);
+	}
+
+	public void SwitchToIntro()
+	{
+		CurrentState = State.Intro;
+		Go.to(introPanel, 1.5f, new GoTweenConfig().floatProp("alpha", 1f));
+		Go.to(firstIntroPanel, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(0.1f));
+		Go.to(secondIntroPanel, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(7.5f));
+		Go.to(pressAnyKeyIntro, 2f, new GoTweenConfig().floatProp("alpha", 1f).setDelay(12f));
+	}
+
+	public void EndIntro()
+	{
+		SwithToStartingGame();
+		Go.to(introPanel, 1f, new GoTweenConfig()
+			.floatProp("alpha", 0f)
+		);
+		Go.to(introBackground, 1f, new GoTweenConfig().floatProp("alpha", 0f));
+	}
 
 	public void SwithToStartingGame()
 	{
@@ -70,7 +116,14 @@ public class GameController : MonoBehaviour
 
 	void Update()
 	{
-		if (CurrentState == State.StartingGame)
+		if (CurrentState == State.Intro)
+		{
+			if (Input.anyKeyDown)
+			{
+				EndIntro();
+			}
+		}
+		else if (CurrentState == State.StartingGame)
 		{
 			if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton9))
 				&& PlayerController.I.Players.Exists(p => p.isActive))
