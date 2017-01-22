@@ -159,10 +159,37 @@ public class GameController : MonoBehaviour
 			}
 		}
 
-		if (IsFinishedIntro && Input.GetKeyDown(KeyCode.Escape))
+		if (IsFinishedIntro)
 		{
-			SwithToStartingGame();
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				SwithToStartingGame();
+			}
+			else
+			{
+				foreach (KeyCode kcode in System.Enum.GetValues(typeof(KeyCode)))
+				{
+					if (IsJoystickSelectButton(kcode) && Input.GetKeyDown(kcode))
+					{
+						SwithToStartingGame();
+						break;
+					}
+				}
+			}
 		}
+	}
+
+	private bool IsJoystickSelectButton(KeyCode kcode)
+	{
+		return kcode == KeyCode.JoystickButton8
+			|| kcode == KeyCode.Joystick1Button8
+			|| kcode == KeyCode.Joystick2Button8
+			|| kcode == KeyCode.Joystick3Button8
+			|| kcode == KeyCode.Joystick4Button8
+			|| kcode == KeyCode.Joystick5Button8
+			|| kcode == KeyCode.Joystick6Button8
+			|| kcode == KeyCode.Joystick7Button8
+			|| kcode == KeyCode.Joystick8Button8;
 	}
 
 }

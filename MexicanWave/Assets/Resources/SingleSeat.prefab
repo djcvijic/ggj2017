@@ -320,7 +320,7 @@ MonoBehaviour:
   yeahSounds:
   - {fileID: 8300000, guid: 34d2d8c1e85b84319a6d32b5a94b041e, type: 3}
   - {fileID: 8300000, guid: dfa056d7b035341e4902332f6b055f7d, type: 3}
-  - {fileID: 8300000, guid: cf43e0ec2bc9544c0b4808d87eb6a4b0, type: 3}
+  - {fileID: 8300000, guid: a1f290fa2af294495bbbaed46c67eccd, type: 3}
   sitDownSounds:
   - {fileID: 8300000, guid: b9f14e4b19f314e4fb0ea4ae696d55de, type: 3}
 --- !u!212 &212000011475236478
