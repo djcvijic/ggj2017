@@ -137,6 +137,7 @@ public class PlayerController : MonoBehaviour
 						seat.InvertColor();
 						seat.DeactivateAccessories();
 						awkwardnessSliderBacks [seat.playedId].color = Color.white;
+						seat.PlayYeah();
 					}
 				}
 			}
@@ -152,6 +153,11 @@ public class PlayerController : MonoBehaviour
 			if (Input.GetKeyDown(player.keyCode) && !player.justActivated)
 			{
 				player.isStanding = !player.isStanding;
+				var seat = StandsView.I.At(player.x, player.y);
+				if (player.isStanding)
+					seat.PlayYeah();
+				else
+					seat.PlaySitDown();
 			}
 
 			// do we need to deactivate this one
@@ -169,6 +175,7 @@ public class PlayerController : MonoBehaviour
 
 					seat.playedId = -1;
 					seat.ResetColor();
+					seat.PlaySitDown();
 					awkwardnessSliderBacks [i].color = Color.gray;
 				}
 			}

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class SingleSeat : MonoBehaviour
 {
@@ -22,13 +22,33 @@ public class SingleSeat : MonoBehaviour
 	private Transform myAccessory;
 	private Vector3 initialAccessoryPosition;
 
+	public List<AudioClip> yeahSounds;
+	public List<AudioClip> sitDownSounds;
+
+	private AudioSource audio;
+
 	private Color oldColor;
 
 	void Awake()
 	{
+		audio = GetComponent<AudioSource>();
 		myRenderer = myHuman.GetComponent<SpriteRenderer>();
 		humanSprites = Resources.LoadAll<Sprite>("Sprites/ljudi");
 		initialHumanPosition = myHuman.transform.localPosition;
+	}
+
+	public void PlayYeah()
+	{
+		audio.Stop();
+		audio.clip = yeahSounds[Random.Range(0, yeahSounds.Count - 1)];
+		audio.Play();
+	}
+
+	public void PlaySitDown()
+	{
+		audio.Stop();
+		audio.clip = sitDownSounds[Random.Range(0, sitDownSounds.Count - 1)];
+		audio.Play();
 	}
 
 	public void Init(StandsView view, int x, int y, Color color, Color accessoryColor)

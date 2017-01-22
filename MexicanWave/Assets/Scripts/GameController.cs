@@ -156,7 +156,7 @@ public class GameController : MonoBehaviour
 			}
 		}
 
-		if (Input.GetKeyDown(KeyCode.Escape))
+		if (IsFinishedIntro && Input.GetKeyDown(KeyCode.Escape))
 		{
 			SwithToStartingGame();
 		}

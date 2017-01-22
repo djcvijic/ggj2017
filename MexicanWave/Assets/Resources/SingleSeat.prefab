@@ -52,6 +52,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012681375550}
   - 114: {fileID: 114000012296930218}
+  - 82: {fileID: 82000013017880390}
   m_Layer: 0
   m_Name: SingleSeat
   m_TagString: Untagged
@@ -220,6 +221,80 @@ Transform:
   - {fileID: 4000011246711754}
   m_Father: {fileID: 4000012681375550}
   m_RootOrder: 1
+--- !u!82 &82000013017880390
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011265415566}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114000012296930218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,6 +317,12 @@ MonoBehaviour:
   - {fileID: 1000010011060302}
   - {fileID: 1000010907423152}
   - {fileID: 1000013145777714}
+  yeahSounds:
+  - {fileID: 8300000, guid: 34d2d8c1e85b84319a6d32b5a94b041e, type: 3}
+  - {fileID: 8300000, guid: dfa056d7b035341e4902332f6b055f7d, type: 3}
+  - {fileID: 8300000, guid: cf43e0ec2bc9544c0b4808d87eb6a4b0, type: 3}
+  sitDownSounds:
+  - {fileID: 8300000, guid: b9f14e4b19f314e4fb0ea4ae696d55de, type: 3}
 --- !u!212 &212000011475236478
 SpriteRenderer:
   m_ObjectHideFlags: 1

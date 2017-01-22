@@ -90,7 +90,6 @@ public class WaveController : MonoBehaviour
 			}
 		}
 		var audioValue = Mathf.Clamp(1 - (closestWaveDistance / positionMax), 0, 1);
-		Debug.Log(audioValue);
 		crowdAudio.volume = crowdAudioMinVolume + ((1 - crowdAudioMinVolume) * audioValue);
 		crowdAudio.pitch = 1 + (audioValue * crowdAudioPitchJitter);
 		if (closestWave != null)
