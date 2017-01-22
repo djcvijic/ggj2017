@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class WaveController : MonoBehaviour
@@ -35,6 +36,10 @@ public class WaveController : MonoBehaviour
 
 	public AnimationCurve gaussCurve;
 
+	public AudioSource crowdAudio;
+	public float crowdAudioMinVolume;
+	public float crowdAudioPitchJitter;
+
 	public void ClearWaves()
 	{
 		allWaves.Clear();
@@ -63,6 +68,35 @@ public class WaveController : MonoBehaviour
 		{
 			allWaves[i].UpdateWave();
 		}
+		UpdateCrowdAudio();
+	}
+
+	private void UpdateCrowdAudio()
+	{
+		Wave closestWave = null;
+		var closestWaveDistance = positionMax;
+		if (allWaves.Count > 0)
+		{
+			closestWave = allWaves[0];
+			closestWaveDistance = Mathf.Abs(closestWave.centerPosition);
+		}
+		for (int i = 0; i < allWaves.Count; i++)
+		{
+			var waveDistance = Mathf.Abs(allWaves[i].centerPosition);
+			if (waveDistance < closestWaveDistance)
+			{
+				closestWave = allWaves[i];
+				closestWaveDistance = waveDistance;
+			}
+		}
+		var audioValue = Mathf.Clamp(1 - (closestWaveDistance / positionMax), 0, 1);
+		Debug.Log(audioValue);
+		crowdAudio.volume = crowdAudioMinVolume + ((1 - crowdAudioMinVolume) * audioValue);
+		crowdAudio.pitch = 1 + (audioValue * crowdAudioPitchJitter);
+		if (closestWave != null)
+		{
+			crowdAudio.panStereo = closestWave.centerPosition / positionMax;
+		}
 	}
 
 	public float CalculateInfluence(float val)
@@ -84,6 +118,9 @@ public class WaveController : MonoBehaviour
 	public void StartFirstWave()
 	{
 		allWaves.AddRange(WaveGenerator.I.GetNextLevel());
+		if (crowdAudio.isPlaying)
+			crowdAudio.Stop();
+		crowdAudio.Play();
 	}
 
 	public void WaveEnded(Wave wave)
